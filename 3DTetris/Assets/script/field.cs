@@ -5,9 +5,11 @@ using UnityEngine;
 public class field : MonoBehaviour
 {
     public Material set_material;
-    private int field_x = 5;
-    private int field_y = 10;
-    private int field_z = 5;
+    private const int field_x = 5;
+    private const int field_y = 10;
+    private const int field_z = 5;
+
+    public GameObject[, ,] cube = new GameObject[field_z, field_y, field_x];
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +20,10 @@ public class field : MonoBehaviour
             {
                 for (var x = 0; x < field_x; x++)
                 {
-                    var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    cube.transform.position = new Vector3(x, y, z);
-                    //cube.AddComponent<Rigidbody>();
-                    //Renderer renderer = GetComponent<Renderer>();
-                    //cube.AddComponent<Renderer>();
-                    cube.GetComponent<Renderer>().material = set_material;
-                    cube.GetComponent<Collider>().isTrigger = true;
+                    cube[z,y,x] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    cube[z, y, x].transform.position = new Vector3(x, y, z);
+                    cube[z, y, x].GetComponent<Renderer>().material = set_material;
+                    cube[z, y, x].GetComponent<Collider>().isTrigger = true;
                 }
             }
         }
