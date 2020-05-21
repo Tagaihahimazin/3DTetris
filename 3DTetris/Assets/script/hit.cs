@@ -16,20 +16,20 @@ public class hit : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        //move_flag = true;
-        Debug.Log(collision.gameObject.name + "Enter"); // ログを表示する
-    }
-    void OnCollisionStay(Collision collision)
-    {
-        //move_flag = true;
-        Debug.Log(collision.gameObject.name + "Enter"); // ログを表示する
-    }
-    void OnCollisionExit(Collision collision)
-    {
-        //move_flag = true;
-        Debug.Log(collision.gameObject.name + "Enter"); // ログを表示する
-    }
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    //move_flag = true;
+    //    Debug.Log(collision.gameObject.name + "Enter"); // ログを表示する
+    //}
+    //void OnCollisionStay(Collision collision)
+    //{
+    //    //move_flag = true;
+    //    Debug.Log(collision.gameObject.name + "Enter"); // ログを表示する
+    //}
+    //void OnCollisionExit(Collision collision)
+    //{
+    //    //move_flag = true;
+    //    Debug.Log(collision.gameObject.name + "Enter"); // ログを表示する
+    //}
 
 }
