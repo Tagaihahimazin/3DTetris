@@ -123,7 +123,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f46d0e0818d2468c71bcb7f298f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piece_script: {fileID: 7374938019460303355, guid: 77ae1c614d673d244ab5412524438433,
-    type: 3}
   field_obj: {fileID: 1741049644025314694, guid: c7ef7c5aee5c4184dbb414f923c3fe89,
     type: 3}

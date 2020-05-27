@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 7374938019460303354}
   m_Layer: 0
   m_Name: peace
-  m_TagString: piece
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

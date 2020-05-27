@@ -11,6 +11,7 @@ TagManager:
   - non
   - field
   - dammy
+  - block
   layers:
   - Default
   - TransparentFX

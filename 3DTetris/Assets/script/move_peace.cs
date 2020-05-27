@@ -13,6 +13,8 @@ public class move_peace : MonoBehaviour
     public GameObject script;
     public GameObject dummy_piece;
 
+    private field field_script;
+
     public static
         
         
@@ -40,13 +42,23 @@ public class move_peace : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        field_script = script.GetComponent<field>();
+        //field_script.set_flag = true;
         peace_speed = 1.0f;
         for (int i = 0; i < 9; i++)
         {   
             dummy[i] = Instantiate(dummy_piece, this.gameObject.transform.position + dummy_pos[i], Quaternion.Euler(dummy_rot[i]));
             dummy[i].name = "dummy" + i;
+            if (i == 0)
+            {
+                foreach (Transform child in dummy[0].transform)
+                {
+                    child.tag = "dummy0";
+                }
+            }
             dummy[i].tag = "dummy";
         }
+        field_script.set_flag = true;
     }
 
     // Update is called once per frame
