@@ -7,10 +7,12 @@ public class field : MonoBehaviour
 {
     public List<Material> Materials_list = new List<Material>();
 
+    // fieldサイズ
     private const int field_x = 5;
     private const int field_y = 10;
     private const int field_z = 5;
 
+    // fieldの状態
     private const int _NON = 0;
     private const int _BLOCK = 1;
     private const int _KABE = 2;
@@ -50,6 +52,14 @@ public class field : MonoBehaviour
             }
         }
 
+        /* --------------------------------------- *
+         *         配列からfield生成               *
+         *         cube name：field_z_y_x          *
+         *                                         *
+         *         0 _NON   -> 何もなし            *
+         *         1 _BLOCK -> 配置済みブロック    *
+         *         2 _KABE  -> 壁                  *
+         * --------------------------------------- */
         for (var z = 0; z < field_cube.GetLength(0); z++)
         {
             for (var y = 0; y < field_cube.GetLength(1); y++)
