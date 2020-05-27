@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class hit_dummy : MonoBehaviour
 {
-    public GameObject piece_script;
     public GameObject field_obj;
 
     private field field_script;
@@ -24,13 +23,16 @@ public class hit_dummy : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (gameObject.tag == "floor")
+        //if (field_script.set_flag != false)
         {
-            if (collider.gameObject.tag == "dummy")
+            if (gameObject.tag == "floor" || gameObject.tag == "block")
             {
-                field_script.set_cube(GameObject.Find("peace"));
+                Debug.Log(collider.gameObject.tag);
+                if (collider.gameObject.tag == "dummy0")
+                {
+                     field_script.set_cube(GameObject.Find("peace"));
+                }
             }
         }
-
     }
 }
