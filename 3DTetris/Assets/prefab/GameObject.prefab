@@ -45,10 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Materials_list:
   - {fileID: 2100000, guid: 2a3850d9e9eb8ac4494c3a7eba725dbb, type: 2}
-  - {fileID: 2100000, guid: 94c000a83b8e7504880982a4c255d7b7, type: 2}
+  - {fileID: 2100000, guid: 0daaf4b00086d7e4dbfb6fa851c0422b, type: 2}
   - {fileID: 2100000, guid: ea63166674e387a45a524825add91ecd, type: 2}
   field_obj: {fileID: 2615246725989723873, guid: c13d59dfa36659248b14b734a3309dea,
     type: 3}
   peace_obj: {fileID: 7374938019460303355, guid: 77ae1c614d673d244ab5412524438433,
     type: 3}
-  set_flag: 0
+  set_flag: 1
