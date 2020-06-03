@@ -105,38 +105,50 @@ public class move_peace : MonoBehaviour
              * ------------------------------ */
             if (Input.GetKeyDown(KeyCode.A))                // Aキー:左に回転
             {
-                Debug.Log("A");
-                this.gameObject.transform.Rotate(Vector3.forward * 90, Space.World);
-                for (int i = 0; i < 9; i++)
+                if (left_rot_flag == false)
                 {
-                    GameObject.Find("dummy" + i).transform.Rotate(Vector3.forward * 90, Space.World);
+                    Debug.Log("A");
+                    this.gameObject.transform.Rotate(Vector3.forward * 90, Space.World);
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.Rotate(Vector3.forward * 90, Space.World);
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.W))           // Wキー:奥に回転
             {
-                Debug.Log("W");
-                this.gameObject.transform.Rotate(Vector3.right * 90, Space.World);
-                for (int i = 0; i < 9; i++)
+                if (back_rot_flag == false)
                 {
-                    GameObject.Find("dummy" + i).transform.Rotate(Vector3.right * 90, Space.World);
+                    Debug.Log("W");
+                    this.gameObject.transform.Rotate(Vector3.right * 90, Space.World);
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.Rotate(Vector3.right * 90, Space.World);
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.S))           // Sキー:手前に回転
             {
-                Debug.Log("S");
-                this.gameObject.transform.Rotate(Vector3.left * 90, Space.World);
-                for (int i = 0; i < 9; i++)
+                if (forward_rot_flag == false)
                 {
-                    GameObject.Find("dummy" + i).transform.Rotate(Vector3.left * 90, Space.World);
+                    Debug.Log("S");
+                    this.gameObject.transform.Rotate(Vector3.left * 90, Space.World);
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.Rotate(Vector3.left * 90, Space.World);
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.D))           // Dキー:右に回転
             {
-                Debug.Log("D");
-                this.gameObject.transform.Rotate(Vector3.back * 90, Space.World);
-                for (int i = 0; i < 9; i++)
+                if (right_rot_flag == false)
                 {
-                    GameObject.Find("dummy" + i).transform.Rotate(Vector3.back * 90, Space.World);
+                    Debug.Log("D");
+                    this.gameObject.transform.Rotate(Vector3.back * 90, Space.World);
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.Rotate(Vector3.back * 90, Space.World);
+                    }
                 }
             }
 
@@ -157,11 +169,14 @@ public class move_peace : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow))     // ↑キー:奥に移動
             {
-                Debug.Log("↑");
-                this.gameObject.transform.position += Vector3.forward;
-                for (int i = 0; i < 9; i++)
+                if (back_move_flag == false)
                 {
-                    GameObject.Find("dummy" + i).transform.position += Vector3.forward;
+                    Debug.Log("↑");
+                    this.gameObject.transform.position += Vector3.forward;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.position += Vector3.forward;
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))  // →キー:右に移動
@@ -178,11 +193,14 @@ public class move_peace : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))   // ↓キー:手前に移動
             {
-                Debug.Log("↓");
-                this.gameObject.transform.position += Vector3.back;
-                for (int i = 0; i < 9; i++)
+                if (forward_move_flag == false)
                 {
-                    GameObject.Find("dummy" + i).transform.position += Vector3.back;
+                    Debug.Log("↓");
+                    this.gameObject.transform.position += Vector3.back;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.position += Vector3.back;
+                    }
                 }
             }
 
