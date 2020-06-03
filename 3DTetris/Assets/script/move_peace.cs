@@ -115,11 +115,11 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.E))           // Eキー:奥に回転
+            else if (Input.GetKeyDown(KeyCode.R))           // Rキー:奥に回転
             {
                 if (back_rot_flag == false)
                 {
-                    Debug.Log("E");
+                    Debug.Log("R");
                     this.gameObject.transform.Rotate(Vector3.right * 90, Space.World);
                     for (int i = 0; i < 9; i++)
                     {
@@ -127,11 +127,11 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Z))           // Zキー:手前に回転
+            else if (Input.GetKeyDown(KeyCode.F))           // Fキー:手前に回転
             {
                 if (forward_rot_flag == false)
                 {
-                    Debug.Log("Z");
+                    Debug.Log("F");
                     this.gameObject.transform.Rotate(Vector3.left * 90, Space.World);
                     for (int i = 0; i < 9; i++)
                     {
@@ -139,11 +139,11 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.C))           // Cキー:右に回転
+            else if (Input.GetKeyDown(KeyCode.E))           // Eキー:右に回転
             {
                 if (right_rot_flag == false)
                 {
-                    Debug.Log("C");
+                    Debug.Log("E");
                     this.gameObject.transform.Rotate(Vector3.back * 90, Space.World);
                     for (int i = 0; i < 9; i++)
                     {
