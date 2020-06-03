@@ -19,7 +19,8 @@ public class field : MonoBehaviour
     private const int _FLOOR = 3;
 
     public GameObject field_obj;
-    public GameObject peace_obj;
+    //public GameObject peace_obj;
+    public GameObject[] pieces=new GameObject[5];
 
     public bool set_flag = true;
 
@@ -169,7 +170,10 @@ public class field : MonoBehaviour
 
     private void Create_piece()
     {
-        GameObject obj = GameObject.Instantiate<GameObject>(peace_obj, new Vector3(3, 10, 3), Quaternion.identity);
+        //GameObject obj = GameObject.Instantiate<GameObject>(peace_obj, new Vector3(3, 10, 3), Quaternion.identity);
+        //obj.name = "peace";
+        GameObject element = pieces[Random.Range(0, pieces.Length)];
+        GameObject obj=GameObject.Instantiate<GameObject>(element, new Vector3(3, 10, 3), Quaternion.identity);
         obj.name = "peace";
     }
 }
