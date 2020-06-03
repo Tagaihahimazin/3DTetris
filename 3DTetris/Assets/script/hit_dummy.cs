@@ -66,6 +66,10 @@ public class hit_dummy : MonoBehaviour
                 Debug.Log("離れた左");
                 piece_script.left_move_flag = false;
             }
+            //if (collider.gameObject.tag == "dummy2")
+            //{
+            //    piece_script.left_move_flag = false;
+            //}
         }
     }
 }
