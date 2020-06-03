@@ -7,7 +7,16 @@ using UnityEngine;
 public class move_peace : MonoBehaviour
 {
     private float timeElapsed;
-    public bool move_flag = false;
+    private bool move_flag;
+    public bool right_move_flag;
+    public bool left_move_flag;
+    public bool forward_move_flag;
+    public bool back_move_flag;
+    public bool forward_rot_flag;
+    public bool right_rot_flag;
+    public bool left_rot_flag;
+    public bool back_rot_flag;
+
     private Vector3 Rotation;
     private float peace_speed;
     public GameObject script;
@@ -49,16 +58,24 @@ public class move_peace : MonoBehaviour
         {   
             dummy[i] = Instantiate(dummy_piece, this.gameObject.transform.position + dummy_pos[i], Quaternion.Euler(dummy_rot[i]));
             dummy[i].name = "dummy" + i;
-            if (i == 0)
+            //if (i == 0)
+            //{
+            foreach (Transform child in dummy[i].transform)
             {
-                foreach (Transform child in dummy[0].transform)
-                {
-                    child.tag = "dummy0";
-                }
+                child.tag = "dummy" + i;
             }
-            dummy[i].tag = "dummy";
+            //}
+            //dummy[i].tag = "dummy";
         }
         field_script.set_flag = true;
+        right_move_flag = false;
+        left_move_flag = false;
+        forward_move_flag = false;
+        back_move_flag = false;
+        forward_rot_flag = false;
+        right_rot_flag = false;
+        left_rot_flag = false;
+        back_rot_flag = false;
     }
 
     // Update is called once per frame
@@ -66,10 +83,14 @@ public class move_peace : MonoBehaviour
     {
         timeElapsed += Time.deltaTime;
         Rotation = this.gameObject.transform.eulerAngles;
+
+
         if (move_flag == false)
         {
+            //Debug.Log(this.right_move_flag);
             if (timeElapsed * peace_speed >= 2)
             {
+                //Debug.Log(right_move_flag);
                 this.gameObject.transform.position += Vector3.down;
                 for (int i = 0; i < 9; i++)
                 {
@@ -124,11 +145,14 @@ public class move_peace : MonoBehaviour
              * ------------------------------ */
             if (Input.GetKeyDown(KeyCode.LeftArrow))        // ←キー:左に移動
             {
-                Debug.Log("←");
-                this.gameObject.transform.position += Vector3.left;
-                for (int i = 0; i < 9; i++)
+                if (left_move_flag == false)
                 {
-                    GameObject.Find("dummy" + i).transform.position += Vector3.left;
+                    Debug.Log("←");
+                    this.gameObject.transform.position += Vector3.left;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.position += Vector3.left;
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow))     // ↑キー:奥に移動
@@ -142,11 +166,14 @@ public class move_peace : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))  // →キー:右に移動
             {
-                Debug.Log("→");
-                this.gameObject.transform.position += Vector3.right;
-                for (int i = 0; i < 9; i++)
+                if (right_move_flag == false)
                 {
-                    GameObject.Find("dummy" + i).transform.position += Vector3.right;
+                    Debug.Log("→");
+                    this.gameObject.transform.position += Vector3.right;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.position += Vector3.right;
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))   // ↓キー:手前に移動
@@ -175,6 +202,7 @@ public class move_peace : MonoBehaviour
             }
         }
     }
+
 
     void OnCollisionEnter(Collision collision)
     {
