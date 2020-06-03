@@ -48,28 +48,71 @@ public class hit_dummy : MonoBehaviour
                 {
                     piece_script.left_move_flag = true;
                 }
+                if (collider.gameObject.tag == "dummy3")
+                {
+                    //Debug.Log("あたった");
+                    piece_script.back_move_flag = true;
+                }
+                if (collider.gameObject.tag == "dummy4")
+                {
+                    piece_script.forward_move_flag = true;
+                }
+                if (collider.gameObject.tag == "dummy5")
+                {
+                    piece_script.left_rot_flag = true;
+                }
+                if (collider.gameObject.tag == "dummy6")
+                {
+                    piece_script.back_rot_flag = true;
+                }
+                if (collider.gameObject.tag == "dummy7")
+                {
+                    piece_script.forward_rot_flag = true;
+                }
+                if (collider.gameObject.tag == "dummy8")
+                {
+                    piece_script.right_rot_flag = true;
+                }
             }
         }
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        if (gameObject.tag == "kabe")
+        if (gameObject.tag != "non")
         {
             if (collider.gameObject.tag == "dummy1")
             {
-                Debug.Log("離れた右");
                 piece_script.right_move_flag = false;
             }
             if (collider.gameObject.tag == "dummy2")
             {
-                Debug.Log("離れた左");
                 piece_script.left_move_flag = false;
             }
-            //if (collider.gameObject.tag == "dummy2")
-            //{
-            //    piece_script.left_move_flag = false;
-            //}
+            if (collider.gameObject.tag == "dummy3")
+            {
+                piece_script.back_move_flag = false;
+            }
+            if (collider.gameObject.tag == "dummy4")
+            {
+                piece_script.forward_move_flag = false;
+            }
+            if (collider.gameObject.tag == "dummy5")
+            {
+                piece_script.left_rot_flag = false;
+            }
+            if (collider.gameObject.tag == "dummy6")
+            {
+                piece_script.back_rot_flag = false;
+            }
+            if (collider.gameObject.tag == "dummy7")
+            {
+                piece_script.forward_rot_flag = false;
+            }
+            if (collider.gameObject.tag == "dummy8")
+            {
+                piece_script.right_rot_flag = false;
+            }
         }
     }
 }
