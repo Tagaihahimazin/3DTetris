@@ -1,20 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class hit_dummy : MonoBehaviour
 {
-    public GameObject field_obj;
+    private GameObject field_obj;
     public GameObject piece_obj;
-
+    public GameObject gameover_canvas_obj;
 
     private field field_script;
     private move_peace piece_script;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //Debug.Log(this.gameObject.tag);
+        field_obj = GameObject.Find("GameObject");
         field_script = field_obj.GetComponent<field>();
     }
 
@@ -32,10 +35,11 @@ public class hit_dummy : MonoBehaviour
         {
             if (gameObject.tag == "floor" || gameObject.tag == "block")
             {
-                Debug.Log(collider.gameObject.tag);
+                //Debug.Log(collider.gameObject.tag);
                 if (collider.gameObject.tag == "dummy0")
                 {
-                     field_script.set_cube(GameObject.Find("peace"));
+                    piece_script.move_flag = true;
+                    field_script.set_cube(GameObject.Find("peace"));
                 }
             } else if (gameObject.tag == "kabe")
             {
@@ -72,6 +76,19 @@ public class hit_dummy : MonoBehaviour
                 if (collider.gameObject.tag == "dummy8")
                 {
                     piece_script.right_rot_flag = true;
+                }
+            }
+            else if (gameObject.tag == "gen")
+            {
+                if (collider.gameObject.tag == "piece")
+                {
+                    Debug.Log("gen 通過");
+                    if (piece_script.move_flag == true)
+                    {
+                        field_script.create_flag = true;
+                        Debug.Log("Gameover");
+                        SceneManager.LoadScene("GameOver");
+                    }
                 }
             }
         }
