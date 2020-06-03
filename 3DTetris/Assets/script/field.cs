@@ -13,10 +13,15 @@ public class field : MonoBehaviour
     private const int field_z = 5;
 
     // fieldの状態
-    private const int _NON = 0;
+    private const int _NON   = 0;
     private const int _BLOCK = 1;
-    private const int _KABE = 2;
+    private const int _KABE  = 2;
+    private const int _FLOOR = 3;
 
+    public GameObject field_obj;
+    public GameObject peace_obj;
+
+    public bool set_flag = true;
 
     public GameObject[, ,] field_cube = new GameObject[field_z+2, field_y+2, field_x+2];
     public int[, ,] field_array = new int[field_z+2, field_y+2, field_x+2];
@@ -30,6 +35,7 @@ public class field : MonoBehaviour
          *         0 _NON   : 何もなし             *
          *         1 _BLOCK : 配置済みブロック     *
          *         2 _KABE  : 壁                   *
+         *         3 _FLOOR : 床                   *
          * --------------------------------------- */
         for (var z = 0; z < field_cube.GetLength(0); z++)
         {
@@ -38,10 +44,13 @@ public class field : MonoBehaviour
                 for (var x = 0; x < field_cube.GetLength(2); x++)
                 {
                     if (x == 0 || x == field_x + 1
-                        || y == 0 || y == field_y + 1
                         || z == 0 || z == field_z + 1)
                     {
                         field_array[z, y, x] = _KABE;
+                    }
+                    else if ( y == 0)
+                    {
+                        field_array[z, y, x] = _FLOOR;
                     }
                     else
                     {
@@ -59,6 +68,7 @@ public class field : MonoBehaviour
          *         0 _NON   -> 何もなし            *
          *         1 _BLOCK -> 配置済みブロック    *
          *         2 _KABE  -> 壁                  *
+         *         3 _FLOOR -> 床                   *
          * --------------------------------------- */
         for (var z = 0; z < field_cube.GetLength(0); z++)
         {
@@ -66,13 +76,16 @@ public class field : MonoBehaviour
             {
                 for (var x = 0; x < field_cube.GetLength(2); x++)
                 {
-                    field_cube[z, y, x] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    field_cube[z, y, x] = GameObject.Instantiate<GameObject>(field_obj, new Vector3(0, 0, 0), Quaternion.identity);
                     string text = $"field_{z}_{y}_{x}";
                     field_cube[z, y, x].name = text;
                     field_cube[z, y, x].transform.position = new Vector3(x, y, z);
                     field_cube[z, y, x].GetComponent<Collider>().isTrigger = true;
                     field_cube[z, y, x].GetComponent<Renderer>().material = Materials_list[field_array[z,y,x]];
-
+                    if ( field_array[z, y, x] == _FLOOR)
+                    {
+                        field_cube[z, y, x].tag = "floor";
+                    }
                 }
             }
         }
@@ -86,18 +99,35 @@ public class field : MonoBehaviour
 
     public void set_cube(GameObject self_peace)
     {
-        foreach (Transform child in self_peace.transform)
+        if (set_flag == true)
         {
-            int x = Mathf.RoundToInt(child.transform.position.x);
-            int y = Mathf.RoundToInt(child.transform.position.y);
-            int z = Mathf.RoundToInt(child.transform.position.z);
-            GameObject change_cube = GameObject.Find($"field_{z}_{y}_{x}");
-            field_array[z, y, x] = _BLOCK;
-            Debug.Log($"{change_cube.transform.position}&{z},{y},{x}&{child.transform.position}");
-            change_cube.GetComponent<Renderer>().material = Materials_list[field_array[z, y, x]];
-            change_cube.GetComponent<Collider>().isTrigger = false;
+            set_flag = false;
+            foreach (Transform child in self_peace.transform)
+            {
+                int x = Mathf.RoundToInt(child.transform.position.x);
+                int y = Mathf.RoundToInt(child.transform.position.y);
+                int z = Mathf.RoundToInt(child.transform.position.z);
+                if (x >= field_x) x = field_x;
+                if (y >= field_y) y = field_y;
+                if (z >= field_z) z = field_z;
+                GameObject change_cube = GameObject.Find($"field_{z}_{y}_{x}");
+                field_array[z, y, x] = _BLOCK;
+                //Debug.Log($"{change_cube.transform.position}&{z},{y},{x}&{child.transform.position}");
+                change_cube.GetComponent<Renderer>().material = Materials_list[field_array[z, y, x]];
+                change_cube.tag = "block";
+            }
+            GameObject[] dummy_Objects = GameObject.FindGameObjectsWithTag("dummy");
+
+            for (int i = 0; i < dummy_Objects.Length; i++)
+            {
+                //Debug.Log("削除");
+                Destroy(dummy_Objects[i]);
+            }
+            Destroy(self_peace.gameObject);
+            //set_flag = false;
+            Create_piece();
+           
         }
-        Destroy(self_peace.gameObject);
     }
     private void test(GameObject[, ,] testtest)
     {
@@ -115,5 +145,21 @@ public class field : MonoBehaviour
                 }
             }
         }
+    }
+
+    public int Get(string name)
+    {
+        if (name == "_BLOCK") { return _BLOCK; }
+        if (name == "_FLOOR") { return _FLOOR; }
+        if (name == "_KABE")  { return _KABE; }
+        if (name == "_NON")   { return _NON; }
+        
+        return -1;
+    }
+
+    private void Create_piece()
+    {
+        GameObject obj = GameObject.Instantiate<GameObject>(peace_obj, new Vector3(3, 10, 3), Quaternion.identity);
+        obj.name = "peace";
     }
 }
