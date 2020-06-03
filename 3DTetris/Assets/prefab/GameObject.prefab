@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 0daaf4b00086d7e4dbfb6fa851c0422b, type: 2}
   - {fileID: 2100000, guid: ea63166674e387a45a524825add91ecd, type: 2}
   - {fileID: 2100000, guid: 28fc61bc51c2b58489e42146dd16d6e3, type: 2}
+  - {fileID: 2100000, guid: 4500bce143d12d343b5d410bf5ceb264, type: 2}
   field_obj: {fileID: 2615246725989723873, guid: c13d59dfa36659248b14b734a3309dea,
     type: 3}
   pieces:
@@ -56,7 +57,5 @@ MonoBehaviour:
   - {fileID: 6586695128914606786, guid: 4a3cb3c75e9582c449de7fb88496e979, type: 3}
   - {fileID: 7664018312534538622, guid: 197ef49360aa9ef4aa890bb383566338, type: 3}
   - {fileID: 215051937009521752, guid: cadef012863d49b4fa4aea72ed1ec894, type: 3}
-  maincamera: {fileID: 6041237558686628765, guid: 2c6a08dc7949a734da9de8058c25c689,
-    type: 3}
-  rotSpeed: 2
   set_flag: 1
+  create_flag: 0

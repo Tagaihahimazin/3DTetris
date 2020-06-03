@@ -7,7 +7,7 @@ using UnityEngine;
 public class move_peace : MonoBehaviour
 {
     private float timeElapsed;
-    private bool move_flag;
+    public bool move_flag;
     public bool right_move_flag;
     public bool left_move_flag;
     public bool forward_move_flag;
@@ -51,7 +51,9 @@ public class move_peace : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        script = GameObject.Find("GameObject");
         field_script = script.GetComponent<field>();
+        //field_script = GameObject.Find("Game Object");
         //field_script.set_flag = true;
         peace_speed = 1.0f;
         for (int i = 0; i < 9; i++)
@@ -68,6 +70,7 @@ public class move_peace : MonoBehaviour
             //dummy[i].tag = "dummy";
         }
         field_script.set_flag = true;
+        move_flag = false;
         right_move_flag = false;
         left_move_flag = false;
         forward_move_flag = false;
@@ -209,13 +212,13 @@ public class move_peace : MonoBehaviour
              * ------------------------------ */
             if (Input.GetKey(KeyCode.Space))                // spaceキーを押している間:スピードアップ
             {
-                Debug.Log("space now");
+                //Debug.Log("space now");
                 peace_speed = 15.0f;
             }
             
             if (Input.GetKeyUp(KeyCode.Space))              // spaceキーを離す:通常スピード
             {
-                Debug.Log("space up");
+                //Debug.Log("space up");
                 peace_speed = 1.0f;
             }
         }

@@ -127,3 +127,5 @@ MonoBehaviour:
     type: 3}
   piece_obj: {fileID: 7374938019460303355, guid: 77ae1c614d673d244ab5412524438433,
     type: 3}
+  gameover_canvas_obj: {fileID: 2672445780605345454, guid: eab279848233ae74ea24539f35d6b79b,
+    type: 3}
