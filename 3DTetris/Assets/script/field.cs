@@ -21,8 +21,10 @@ public class field : MonoBehaviour
     public GameObject field_obj;
     //public GameObject peace_obj;
     public GameObject[] pieces=new GameObject[5];
+    private GameObject[] pieceObj = new GameObject[6];
 
     public bool set_flag = true;
+    int count = 0;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
     public int[,,] field_array = new int[field_z + 2, field_y + 2, field_x + 2];
@@ -170,10 +172,31 @@ public class field : MonoBehaviour
 
     private void Create_piece()
     {
-        //GameObject obj = GameObject.Instantiate<GameObject>(peace_obj, new Vector3(3, 10, 3), Quaternion.identity);
-        //obj.name = "peace";
         GameObject element = pieces[Random.Range(0, pieces.Length)];
-        GameObject obj=GameObject.Instantiate<GameObject>(element, new Vector3(3, 10, 3), Quaternion.identity);
+        GameObject obj=GameObject.Instantiate<GameObject>(element, new Vector3(5, 20, 5), Quaternion.identity);
         obj.name = "peace";
+        /*if (count == 0)
+        {
+            for (int k = 0; k < 6; k++)
+            {
+                pieceObj[k] = pieces[Random.Range(0, pieces.Length)];
+            }
+            count++;
+        }
+        else
+        {
+            for (int k = 0; k < 6; k++)
+            {
+                pieceObj[k] = pieceObj[k + 1];
+            }
+            pieceObj[5]= pieces[Random.Range(0, pieces.Length)];
+        }
+        Instantiate(pieceObj[1], new Vector3(25, 30, 20), Quaternion.identity);
+        Instantiate(pieceObj[2], new Vector3(25, 25, 20), Quaternion.identity);
+        Instantiate(pieceObj[3], new Vector3(25, 20, 20), Quaternion.identity);
+        Instantiate(pieceObj[4], new Vector3(25, 15, 20), Quaternion.identity);
+        Instantiate(pieceObj[5], new Vector3(25, 10, 20), Quaternion.identity);
+        GameObject obj = GameObject.Instantiate<GameObject>(pieceObj[0], new Vector3(5, 20, 5), Quaternion.identity);
+        obj.name = "peace";*/
     }
 }

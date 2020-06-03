@@ -233,7 +233,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5011c66c2475a14e917b24f14a98ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move_flag: 0
+  right_move_flag: 0
+  left_move_flag: 0
+  forward_move_flag: 0
+  back_move_flag: 0
+  forward_rot_flag: 0
+  right_rot_flag: 0
+  left_rot_flag: 0
+  back_rot_flag: 0
   script: {fileID: 1741049644025314694, guid: c7ef7c5aee5c4184dbb414f923c3fe89, type: 3}
   dummy_piece: {fileID: 2856185926163294637, guid: bcb5e34cd1705a948994d79b9bc65475,
     type: 3}
