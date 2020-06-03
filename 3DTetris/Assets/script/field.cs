@@ -214,8 +214,8 @@ public class field : MonoBehaviour
                 pieceObj[k] = pieceObj[k + 1];
             }
             pieceObj[5] = pieces[Random.Range(0, pieces.Length)];
-            count++;
         }
+        count++;
         int posy = 30;
         for (int k = 1; k < 6; k++)
         {
