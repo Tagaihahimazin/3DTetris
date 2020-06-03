@@ -103,11 +103,11 @@ public class move_peace : MonoBehaviour
             /* ------------------------------ *
              *      キー入力処理   回転       *
              * ------------------------------ */
-            if (Input.GetKeyDown(KeyCode.A))                // Aキー:左に回転
+            if (Input.GetKeyDown(KeyCode.Q))                // Qキー:左に回転
             {
                 if (left_rot_flag == false)
                 {
-                    Debug.Log("A");
+                    Debug.Log("Q");
                     this.gameObject.transform.Rotate(Vector3.forward * 90, Space.World);
                     for (int i = 0; i < 9; i++)
                     {
@@ -115,11 +115,11 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.W))           // Wキー:奥に回転
+            else if (Input.GetKeyDown(KeyCode.E))           // Eキー:奥に回転
             {
                 if (back_rot_flag == false)
                 {
-                    Debug.Log("W");
+                    Debug.Log("E");
                     this.gameObject.transform.Rotate(Vector3.right * 90, Space.World);
                     for (int i = 0; i < 9; i++)
                     {
@@ -127,11 +127,11 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.S))           // Sキー:手前に回転
+            else if (Input.GetKeyDown(KeyCode.Z))           // Zキー:手前に回転
             {
                 if (forward_rot_flag == false)
                 {
-                    Debug.Log("S");
+                    Debug.Log("Z");
                     this.gameObject.transform.Rotate(Vector3.left * 90, Space.World);
                     for (int i = 0; i < 9; i++)
                     {
@@ -139,11 +139,11 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.D))           // Dキー:右に回転
+            else if (Input.GetKeyDown(KeyCode.C))           // Cキー:右に回転
             {
                 if (right_rot_flag == false)
                 {
-                    Debug.Log("D");
+                    Debug.Log("C");
                     this.gameObject.transform.Rotate(Vector3.back * 90, Space.World);
                     for (int i = 0; i < 9; i++)
                     {
@@ -155,7 +155,7 @@ public class move_peace : MonoBehaviour
             /* ------------------------------ *
              *      キー入力処理   移動       *
              * ------------------------------ */
-            if (Input.GetKeyDown(KeyCode.LeftArrow))        // ←キー:左に移動
+            if (Input.GetKeyDown(KeyCode.A))        // Aキー:左に移動
             {
                 if (left_move_flag == false)
                 {
@@ -167,7 +167,7 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.UpArrow))     // ↑キー:奥に移動
+            else if (Input.GetKeyDown(KeyCode.W))     // Wキー:奥に移動
             {
                 if (back_move_flag == false)
                 {
@@ -179,7 +179,7 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))  // →キー:右に移動
+            else if (Input.GetKeyDown(KeyCode.D))  // Dキー:右に移動
             {
                 if (right_move_flag == false)
                 {
@@ -191,7 +191,7 @@ public class move_peace : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))   // ↓キー:手前に移動
+            else if (Input.GetKeyDown(KeyCode.S))   // Sキー:手前に移動
             {
                 if (forward_move_flag == false)
                 {
