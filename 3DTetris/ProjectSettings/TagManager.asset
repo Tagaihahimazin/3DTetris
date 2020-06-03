@@ -21,6 +21,7 @@ TagManager:
   - dummy7
   - dummy8
   - kabe
+  - gen
   layers:
   - Default
   - TransparentFX

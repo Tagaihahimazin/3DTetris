@@ -17,6 +17,7 @@ public class field : MonoBehaviour
     private const int _BLOCK = 1;
     private const int _KABE = 2;
     private const int _FLOOR = 3;
+    private const int _GEN = 4;
 
     public GameObject field_obj;
     //public GameObject peace_obj;
@@ -31,6 +32,7 @@ public class field : MonoBehaviour
     private Vector3 defPos;
 
     public bool set_flag = true;
+    public bool create_flag = false;
     int count = 0;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
@@ -46,6 +48,7 @@ public class field : MonoBehaviour
          *         1 _BLOCK : 配置済みブロック     *
          *         2 _KABE  : 壁                   *
          *         3 _FLOOR : 床                   *
+         *         4 _GEN   : 生成位置             *
          * --------------------------------------- */
         for (var z = 0; z < field_cube.GetLength(0); z++)
         {
@@ -53,7 +56,11 @@ public class field : MonoBehaviour
             {
                 for (var x = 0; x < field_cube.GetLength(2); x++)
                 {
-                    if (x == 0 || x == field_x + 1
+                    if ((x == 5 || x == 6)&&(z == 5 || z == 6)&&(y == field_cube.GetLength(1)-1))
+                    {
+                        field_array[z, y, x] = _GEN;
+                    }
+                    else if (x == 0 || x == field_x + 1
                         || z == 0 || z == field_z + 1)
                     {
                         field_array[z, y, x] = _KABE;
@@ -66,7 +73,6 @@ public class field : MonoBehaviour
                     {
                         field_array[z, y, x] = _NON;
                     }
-
                 }
             }
         }
@@ -78,7 +84,8 @@ public class field : MonoBehaviour
          *         0 _NON   -> 何もなし            *
          *         1 _BLOCK -> 配置済みブロック    *
          *         2 _KABE  -> 壁                  *
-         *         3 _FLOOR -> 床                   *
+         *         3 _FLOOR -> 床                  *
+         *         4 _GEN   -> 生成位置            *
          * --------------------------------------- */
         for (var z = 0; z < field_cube.GetLength(0); z++)
         {
@@ -104,9 +111,14 @@ public class field : MonoBehaviour
                     {
                         field_cube[z, y, x].tag = "non";
                     }
+                    if (field_array[z, y, x] == _GEN)
+                    {
+                        field_cube[z, y, x].tag = "gen";
+                    }
                 }
             }
         }
+        create_flag = false;
         maincamera = GameObject.Find("Main Camera");
         playerObject = field_cube[6,11,6].gameObject;
         defAngle = maincamera.transform.localEulerAngles;
@@ -122,8 +134,8 @@ public class field : MonoBehaviour
 
     public void set_cube(GameObject self_peace)
     {
-        if (set_flag == true)
-        {
+         if (set_flag == true)
+         {
             set_flag = false;
             foreach (Transform child in self_peace.transform)
             {
@@ -148,8 +160,10 @@ public class field : MonoBehaviour
             }
             Destroy(self_peace.gameObject);
             //set_flag = false;
-            Create_piece();
-
+            if (create_flag == false)
+            {
+                Create_piece();
+            }
         }
     }
     private void test(GameObject[,,] testtest)
@@ -219,7 +233,7 @@ public class field : MonoBehaviour
         }
         else if (Input.GetMouseButton(0))
         {
-            Debug.Log(Input.GetAxis("Mouse X"));
+            //Debug.Log(Input.GetAxis("Mouse X"));
             //Vector3でX,Y方向の回転の度合いを定義
             newAngle = new Vector3(Input.GetAxis("Mouse X") * rotSpeed, Input.GetAxis("Mouse Y") * rotSpeed * -1, 0);
 
