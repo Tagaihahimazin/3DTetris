@@ -35,7 +35,6 @@ public class field : MonoBehaviour
     public bool set_flag = true;
     public bool create_flag = false;
     int count = 0;
-    public bool set_flag = true;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
     public int[,,] field_array = new int[field_z + 2, field_y + 2, field_x + 2];
@@ -131,7 +130,10 @@ public class field : MonoBehaviour
         {
             pieceObj[k] = pieces[Random.Range(0, pieces.Length)];
         }
-        Create_piece();
+        if (create_flag == false)
+        {
+            Create_piece();
+        }
     }
 
     // Update is called once per frame
