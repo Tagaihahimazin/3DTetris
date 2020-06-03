@@ -85,9 +85,11 @@ public class hit_dummy : MonoBehaviour
                     Debug.Log("gen 通過");
                     if (piece_script.move_flag == true)
                     {
-                        field_script.create_flag = true;
-                        Debug.Log("Gameover");
-                        SceneManager.LoadScene("GameOver");
+                        if (field_script.create_flag == false) {
+                            field_script.create_flag = true;
+                            Debug.Log("Gameover");
+                            SceneManager.LoadScene("GameOver");
+                        }
                     }
                 }
             }
