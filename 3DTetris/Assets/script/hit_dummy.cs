@@ -44,10 +44,10 @@ public class hit_dummy : MonoBehaviour
                     //Debug.Log("あたった");
                     piece_script.right_move_flag = true;
                 }
-                //if (collider.gameObject.tag == "dummy2")
-                //{
-                //    piece_script.left_move_flag = true;
-                //}
+                if (collider.gameObject.tag == "dummy2")
+                {
+                    piece_script.left_move_flag = true;
+                }
             }
         }
     }
@@ -58,7 +58,13 @@ public class hit_dummy : MonoBehaviour
         {
             if (collider.gameObject.tag == "dummy1")
             {
+                Debug.Log("離れた右");
                 piece_script.right_move_flag = false;
+            }
+            if (collider.gameObject.tag == "dummy2")
+            {
+                Debug.Log("離れた左");
+                piece_script.left_move_flag = false;
             }
             //if (collider.gameObject.tag == "dummy2")
             //{
