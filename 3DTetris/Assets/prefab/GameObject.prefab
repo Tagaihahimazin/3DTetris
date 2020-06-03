@@ -50,6 +50,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 28fc61bc51c2b58489e42146dd16d6e3, type: 2}
   field_obj: {fileID: 2615246725989723873, guid: c13d59dfa36659248b14b734a3309dea,
     type: 3}
-  peace_obj: {fileID: 7374938019460303355, guid: 77ae1c614d673d244ab5412524438433,
+  peace_obj: {fileID: 7664018312534538622, guid: 197ef49360aa9ef4aa890bb383566338,
     type: 3}
   set_flag: 1
