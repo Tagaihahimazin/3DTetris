@@ -51,4 +51,5 @@ MonoBehaviour:
     type: 3}
   peace_obj: {fileID: 7374938019460303355, guid: 77ae1c614d673d244ab5412524438433,
     type: 3}
+  hit_dummy_obj: {fileID: 1741049644025314694}
   set_flag: 1

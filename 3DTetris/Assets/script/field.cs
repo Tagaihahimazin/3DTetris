@@ -86,9 +86,19 @@ public class field : MonoBehaviour
                     {
                         field_cube[z, y, x].tag = "floor";
                     }
+                    if (field_array[z, y, x] == _KABE)
+                    {
+                        field_cube[z, y, x].tag = "kabe";
+                    }
+                    if (field_array[z, y, x] == _NON)
+                    {
+                        field_cube[z, y, x].tag = "non";
+                    }
                 }
             }
         }
+
+        Create_piece();
     }
 
     // Update is called once per frame
