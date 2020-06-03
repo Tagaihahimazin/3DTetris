@@ -22,6 +22,13 @@ public class field : MonoBehaviour
     //public GameObject peace_obj;
     public GameObject[] pieces=new GameObject[5];
 
+    private GameObject maincamera;
+    private float rotSpeed = 2.0f;
+    private GameObject playerObject;
+    private Vector3 defAngle;
+    private Vector3 newAngle;
+    private Vector3 defPos;
+
     public bool set_flag = true;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
@@ -98,14 +105,17 @@ public class field : MonoBehaviour
                 }
             }
         }
-
+        maincamera = GameObject.Find("Main Camera");
+        playerObject = field_cube[6,11,6].gameObject;
+        defAngle = maincamera.transform.localEulerAngles;
+        defPos = maincamera.transform.localPosition;
         Create_piece();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        rotateCamera();
     }
 
     public void set_cube(GameObject self_peace)
@@ -175,5 +185,30 @@ public class field : MonoBehaviour
         GameObject element = pieces[Random.Range(0, pieces.Length)];
         GameObject obj=GameObject.Instantiate<GameObject>(element, new Vector3(3, 10, 3), Quaternion.identity);
         obj.name = "peace";
+    }
+
+    private void rotateCamera()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            // マウスクリック開始(マウスダウン)時にカメラの角度を保持(Z軸には回転させないため).
+            newAngle = defAngle;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            Debug.Log(Input.GetAxis("Mouse X"));
+            //Vector3でX,Y方向の回転の度合いを定義
+            newAngle = new Vector3(Input.GetAxis("Mouse X") * rotSpeed, Input.GetAxis("Mouse Y") * rotSpeed * -1, 0);
+
+            //transform.RotateAround()をしようしてメインカメラを回転させる
+            maincamera.transform.RotateAround(playerObject.transform.position, Vector3.up, newAngle.x);
+            maincamera.transform.RotateAround(playerObject.transform.position, transform.right, newAngle.y);
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            //transform.RotateAround()をしようしてメインカメラを回転させる
+            maincamera.transform.rotation = Quaternion.Euler(defAngle);
+            maincamera.transform.position = defPos;
+        }
     }
 }
