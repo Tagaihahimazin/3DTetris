@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class field : MonoBehaviour
@@ -20,11 +21,11 @@ public class field : MonoBehaviour
     private const int _GEN = 4;
 
     public GameObject field_obj;
-    //public GameObject peace_obj;
     public GameObject[] pieces=new GameObject[5];
     private GameObject[] pieceObj = new GameObject[6];
-
-    private GameObject maincamera;
+    private GameObject[] mino = new GameObject[6];
+    private GameObject[] nono = new GameObject[6];
+    private GameObject maincamera,subcamera;
     private float rotSpeed = 2.0f;
     private GameObject playerObject;
     private Vector3 defAngle;
@@ -34,6 +35,7 @@ public class field : MonoBehaviour
     public bool set_flag = true;
     public bool create_flag = false;
     int count = 0;
+    public bool set_flag = true;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
     public int[,,] field_array = new int[field_z + 2, field_y + 2, field_x + 2];
@@ -120,9 +122,15 @@ public class field : MonoBehaviour
         }
         create_flag = false;
         maincamera = GameObject.Find("Main Camera");
+        subcamera = GameObject.Find("Sub Camera");
         playerObject = field_cube[6,11,6].gameObject;
         defAngle = maincamera.transform.localEulerAngles;
         defPos = maincamera.transform.localPosition;
+
+        for (int k = 0; k < 6; k++)
+        {
+            pieceObj[k] = pieces[Random.Range(0, pieces.Length)];
+        }
         Create_piece();
     }
 
@@ -196,32 +204,29 @@ public class field : MonoBehaviour
 
     private void Create_piece()
     {
-        GameObject element = pieces[Random.Range(0, pieces.Length)];
-        GameObject obj=GameObject.Instantiate<GameObject>(element, new Vector3(5, 20, 5), Quaternion.identity);
-        obj.name = "peace";
-        /*if (count == 0)
+        if (count != 0)
         {
-            for (int k = 0; k < 6; k++)
+            for (int i = 0; i < 6; i++)
             {
-                pieceObj[k] = pieces[Random.Range(0, pieces.Length)];
+                Destroy(mino[i]);
             }
-            count++;
-        }
-        else
-        {
-            for (int k = 0; k < 6; k++)
+            for (int k = 0; k < 5; k++)
             {
                 pieceObj[k] = pieceObj[k + 1];
             }
-            pieceObj[5]= pieces[Random.Range(0, pieces.Length)];
+            pieceObj[5] = pieces[Random.Range(0, pieces.Length)];
+            count++;
         }
-        Instantiate(pieceObj[1], new Vector3(25, 30, 20), Quaternion.identity);
-        Instantiate(pieceObj[2], new Vector3(25, 25, 20), Quaternion.identity);
-        Instantiate(pieceObj[3], new Vector3(25, 20, 20), Quaternion.identity);
-        Instantiate(pieceObj[4], new Vector3(25, 15, 20), Quaternion.identity);
-        Instantiate(pieceObj[5], new Vector3(25, 10, 20), Quaternion.identity);
-        GameObject obj = GameObject.Instantiate<GameObject>(pieceObj[0], new Vector3(5, 20, 5), Quaternion.identity);
-        obj.name = "peace";*/
+        int posy = 30;
+        for (int k = 1; k < 6; k++)
+        {
+            mino[k] = GameObject.Instantiate<GameObject>(pieceObj[k], new Vector3(25, posy, 20), Quaternion.identity);
+            posy -= 5;
+            mino[k].name = "nextpiece";
+        }
+        mino[0] = GameObject.Instantiate<GameObject>(pieceObj[0], new Vector3(5, 20, 5), Quaternion.identity);
+        mino[0].GetComponent<move_peace>().enabled = true;
+        mino[0].name = "peace";
     }
 
     private void rotateCamera()
@@ -249,3 +254,4 @@ public class field : MonoBehaviour
         }
     }
 }
+
