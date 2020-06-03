@@ -13,9 +13,9 @@ public class field : MonoBehaviour
     private const int field_z = 5;
 
     // fieldの状態
-    private const int _NON   = 0;
+    private const int _NON = 0;
     private const int _BLOCK = 1;
-    private const int _KABE  = 2;
+    private const int _KABE = 2;
     private const int _FLOOR = 3;
 
     public GameObject field_obj;
@@ -23,8 +23,8 @@ public class field : MonoBehaviour
 
     public bool set_flag = true;
 
-    public GameObject[, ,] field_cube = new GameObject[field_z+2, field_y+2, field_x+2];
-    public int[, ,] field_array = new int[field_z+2, field_y+2, field_x+2];
+    public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
+    public int[,,] field_array = new int[field_z + 2, field_y + 2, field_x + 2];
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,7 @@ public class field : MonoBehaviour
                     {
                         field_array[z, y, x] = _KABE;
                     }
-                    else if ( y == 0)
+                    else if (y == 0)
                     {
                         field_array[z, y, x] = _FLOOR;
                     }
@@ -81,8 +81,8 @@ public class field : MonoBehaviour
                     field_cube[z, y, x].name = text;
                     field_cube[z, y, x].transform.position = new Vector3(x, y, z);
                     field_cube[z, y, x].GetComponent<Collider>().isTrigger = true;
-                    field_cube[z, y, x].GetComponent<Renderer>().material = Materials_list[field_array[z,y,x]];
-                    if ( field_array[z, y, x] == _FLOOR)
+                    field_cube[z, y, x].GetComponent<Renderer>().material = Materials_list[field_array[z, y, x]];
+                    if (field_array[z, y, x] == _FLOOR)
                     {
                         field_cube[z, y, x].tag = "floor";
                     }
@@ -104,7 +104,7 @@ public class field : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void set_cube(GameObject self_peace)
@@ -136,10 +136,10 @@ public class field : MonoBehaviour
             Destroy(self_peace.gameObject);
             //set_flag = false;
             Create_piece();
-           
+
         }
     }
-    private void test(GameObject[, ,] testtest)
+    private void test(GameObject[,,] testtest)
     {
         foreach (GameObject i in testtest)
         {
@@ -161,9 +161,9 @@ public class field : MonoBehaviour
     {
         if (name == "_BLOCK") { return _BLOCK; }
         if (name == "_FLOOR") { return _FLOOR; }
-        if (name == "_KABE")  { return _KABE; }
-        if (name == "_NON")   { return _NON; }
-        
+        if (name == "_KABE") { return _KABE; }
+        if (name == "_NON") { return _NON; }
+
         return -1;
     }
 
