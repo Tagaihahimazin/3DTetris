@@ -35,7 +35,6 @@ public class field : MonoBehaviour
     public bool set_flag = true;
     public bool create_flag = false;
     int count = 0;
-    //public bool set_flag = true;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
     public int[,,] field_array = new int[field_z + 2, field_y + 2, field_x + 2];
