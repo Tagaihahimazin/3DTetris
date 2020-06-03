@@ -8,9 +8,9 @@ public class field : MonoBehaviour
     public List<Material> Materials_list = new List<Material>();
 
     // fieldサイズ
-    private const int field_x = 5;
-    private const int field_y = 10;
-    private const int field_z = 5;
+    private const int field_x = 10;
+    private const int field_y = 20;
+    private const int field_z = 10;
 
     // fieldの状態
     private const int _NON = 0;
@@ -123,7 +123,7 @@ public class field : MonoBehaviour
                 GameObject change_cube = GameObject.Find($"field_{z}_{y}_{x}");
                 field_array[z, y, x] = _BLOCK;
                 //Debug.Log($"{change_cube.transform.position}&{z},{y},{x}&{child.transform.position}");
-                change_cube.GetComponent<Renderer>().material = Materials_list[field_array[z, y, x]];
+                change_cube.GetComponent<Renderer>().material = child.GetComponent<Renderer>().material;
                 change_cube.tag = "block";
             }
             GameObject[] dummy_Objects = GameObject.FindGameObjectsWithTag("dummy");
