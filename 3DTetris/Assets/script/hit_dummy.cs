@@ -7,10 +7,12 @@ public class hit_dummy : MonoBehaviour
 {
     private GameObject field_obj;
     public GameObject piece_obj;
+    public GameObject ghost_obj;
     public GameObject gameover_canvas_obj;
 
     private field field_script;
     private move_peace piece_script;
+    private move_ghost ghost_script;
 
 
     // Start is called before the first frame update
@@ -30,7 +32,11 @@ public class hit_dummy : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         piece_obj = GameObject.Find("peace"); //変数名変えよう
+        ghost_obj = GameObject.Find("ghost");
         piece_script = piece_obj.GetComponent<move_peace>();
+        if (ghost_obj != null) {
+            ghost_script = ghost_obj.GetComponent<move_ghost>();
+        }
         //if (field_script.set_flag != false)
         {
             if (gameObject.tag == "floor" || gameObject.tag == "block")
@@ -40,6 +46,18 @@ public class hit_dummy : MonoBehaviour
                 {
                     piece_script.move_flag = true;
                     field_script.set_cube(GameObject.Find("peace"));
+                }
+                if (ghost_obj != null)
+                {
+                    if (collider.gameObject.tag == "ghost" && ghost_script.move_flag == false)
+                    {
+                        foreach (Transform child in ghost_obj.transform)
+                        {
+                            child.GetComponent<Renderer>().material = ghost_script.Materials_list[0];
+                        }
+                        ghost_script.move_flag = true;
+                        ghost_obj.transform.position += Vector3.up;
+                    }
                 }
             } else if (gameObject.tag == "kabe")
             {
