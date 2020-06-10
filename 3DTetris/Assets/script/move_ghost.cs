@@ -17,11 +17,18 @@ public class move_ghost : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(move_flag != true)
         {
             this.gameObject.transform.position += Vector3.down;
+        }
+        else
+        {
+            foreach (Transform child in this.gameObject.transform)
+            {
+                child.GetComponent<Renderer>().material = Materials_list[0];
+            }
         }
     }
 }

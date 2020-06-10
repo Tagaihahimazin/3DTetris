@@ -51,10 +51,6 @@ public class hit_dummy : MonoBehaviour
                 {
                     if (collider.gameObject.tag == "ghost" && ghost_script.move_flag == false)
                     {
-                        foreach (Transform child in ghost_obj.transform)
-                        {
-                            child.GetComponent<Renderer>().material = ghost_script.Materials_list[0];
-                        }
                         ghost_script.move_flag = true;
                         ghost_obj.transform.position += Vector3.up;
                     }

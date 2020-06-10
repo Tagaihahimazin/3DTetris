@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class field : MonoBehaviour
 {
@@ -21,7 +22,9 @@ public class field : MonoBehaviour
     private const int _GEN = 4;
 
     public GameObject field_obj;
-    public GameObject[] pieces=new GameObject[5];
+    public GameObject GUI_obj;
+    private GameObject GUI_countdown;
+    public GameObject[] pieces = new GameObject[5];
     private GameObject[] pieceObj = new GameObject[6];
     private GameObject[] mino = new GameObject[6];
     private GameObject[] nono = new GameObject[6];
@@ -35,6 +38,7 @@ public class field : MonoBehaviour
     public bool set_flag = true;
     public bool create_flag = false;
     int count = 0;
+    public float gamestart_count = 0;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
     public int[,,] field_array = new int[field_z + 2, field_y + 2, field_x + 2];
@@ -126,6 +130,8 @@ public class field : MonoBehaviour
         defAngle = maincamera.transform.localEulerAngles;
         defPos = maincamera.transform.localPosition;
 
+        GUI_countdown = GUI_obj.transform.Find("CountDown").gameObject;
+
         for (int k = 0; k < 6; k++)
         {
             pieceObj[k] = pieces[Random.Range(0, pieces.Length)];
@@ -139,7 +145,35 @@ public class field : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rotateCamera();
+        if(gamestart_count == -1)
+        {
+            rotateCamera();
+        }
+        else if (gamestart_count < 4)
+        {
+            if (gamestart_count < 1)
+            {
+                GUI_countdown.GetComponent<Text>().text = "3";
+            }
+            else if (gamestart_count < 2)
+            {
+                GUI_countdown.GetComponent<Text>().text = "2";
+            }
+            else if (gamestart_count < 3)
+            {
+                GUI_countdown.GetComponent<Text>().text = "1";
+            }
+            else
+            {
+                GUI_countdown.GetComponent<Text>().text = "START";
+            }
+            gamestart_count += Time.deltaTime;
+        }
+        else
+        {
+            GUI_countdown.GetComponent<Text>().enabled = false;
+            gamestart_count = -1;
+        }
     }
 
     public void set_cube(GameObject self_peace)
