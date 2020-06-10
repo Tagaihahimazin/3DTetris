@@ -89,147 +89,149 @@ public class move_peace : MonoBehaviour
         timeElapsed += Time.deltaTime;
         Rotation = this.gameObject.transform.eulerAngles;
 
-
-        if (move_flag == false)
+        if (field_script.gamestart_count == -1)
         {
-            //Debug.Log(this.right_move_flag);
-            if (timeElapsed * peace_speed >= 2)
+            if (move_flag == false)
             {
-                //Debug.Log(right_move_flag);
-                this.gameObject.transform.position += Vector3.down;
-                for (int i = 0; i < 9; i++)
+                //Debug.Log(this.right_move_flag);
+                if (timeElapsed * peace_speed >= 2)
                 {
-                    GameObject.Find("dummy" + i).transform.position += Vector3.down;
+                    //Debug.Log(right_move_flag);
+                    this.gameObject.transform.position += Vector3.down;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        GameObject.Find("dummy" + i).transform.position += Vector3.down;
+                    }
+
+                    timeElapsed = 0.0f;
                 }
 
-                timeElapsed = 0.0f;
-            }
+                /* ------------------------------ *
+                 *      キー入力処理   回転       *
+                 * ------------------------------ */
+                if (Input.GetKeyDown(KeyCode.Q))                // Qキー:左に回転
+                {
+                    if (left_rot_flag == false)
+                    {
+                        Debug.Log("Q");
+                        this.gameObject.transform.Rotate(Vector3.forward * 90, Space.World);
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.Rotate(Vector3.forward * 90, Space.World);
+                        }
+                        move_ghost_reset();
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.R))           // Rキー:奥に回転
+                {
+                    if (back_rot_flag == false)
+                    {
+                        Debug.Log("R");
+                        this.gameObject.transform.Rotate(Vector3.right * 90, Space.World);
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.Rotate(Vector3.right * 90, Space.World);
+                        }
+                        move_ghost_reset();
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.F))           // Fキー:手前に回転
+                {
+                    if (forward_rot_flag == false)
+                    {
+                        Debug.Log("F");
+                        this.gameObject.transform.Rotate(Vector3.left * 90, Space.World);
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.Rotate(Vector3.left * 90, Space.World);
+                        }
+                        move_ghost_reset();
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.E))           // Eキー:右に回転
+                {
+                    if (right_rot_flag == false)
+                    {
+                        Debug.Log("E");
+                        this.gameObject.transform.Rotate(Vector3.back * 90, Space.World);
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.Rotate(Vector3.back * 90, Space.World);
+                        }
+                        move_ghost_reset();
+                    }
+                }
 
-            /* ------------------------------ *
-             *      キー入力処理   回転       *
-             * ------------------------------ */
-            if (Input.GetKeyDown(KeyCode.Q))                // Qキー:左に回転
-            {
-                if (left_rot_flag == false)
+                /* ------------------------------ *
+                 *      キー入力処理   移動       *
+                 * ------------------------------ */
+                if (Input.GetKeyDown(KeyCode.A))        // Aキー:左に移動
                 {
-                    Debug.Log("Q");
-                    this.gameObject.transform.Rotate(Vector3.forward * 90, Space.World);
-                    for (int i = 0; i < 9; i++)
+                    if (left_move_flag == false)
                     {
-                        GameObject.Find("dummy" + i).transform.Rotate(Vector3.forward * 90, Space.World);
+                        Debug.Log("←");
+                        this.gameObject.transform.position += Vector3.left;
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.position += Vector3.left;
+                        }
+                        move_ghost_reset();
                     }
-                    move_ghost_reset();
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.R))           // Rキー:奥に回転
-            {
-                if (back_rot_flag == false)
+                else if (Input.GetKeyDown(KeyCode.W))     // Wキー:奥に移動
                 {
-                    Debug.Log("R");
-                    this.gameObject.transform.Rotate(Vector3.right * 90, Space.World);
-                    for (int i = 0; i < 9; i++)
+                    if (back_move_flag == false)
                     {
-                        GameObject.Find("dummy" + i).transform.Rotate(Vector3.right * 90, Space.World);
+                        Debug.Log("↑");
+                        this.gameObject.transform.position += Vector3.forward;
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.position += Vector3.forward;
+                        }
+                        move_ghost_reset();
                     }
-                    move_ghost_reset();
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.F))           // Fキー:手前に回転
-            {
-                if (forward_rot_flag == false)
+                else if (Input.GetKeyDown(KeyCode.D))  // Dキー:右に移動
                 {
-                    Debug.Log("F");
-                    this.gameObject.transform.Rotate(Vector3.left * 90, Space.World);
-                    for (int i = 0; i < 9; i++)
+                    if (right_move_flag == false)
                     {
-                        GameObject.Find("dummy" + i).transform.Rotate(Vector3.left * 90, Space.World);
+                        Debug.Log("→");
+                        this.gameObject.transform.position += Vector3.right;
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.position += Vector3.right;
+                        }
+                        move_ghost_reset();
                     }
-                    move_ghost_reset();
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.E))           // Eキー:右に回転
-            {
-                if (right_rot_flag == false)
+                else if (Input.GetKeyDown(KeyCode.S))   // Sキー:手前に移動
                 {
-                    Debug.Log("E");
-                    this.gameObject.transform.Rotate(Vector3.back * 90, Space.World);
-                    for (int i = 0; i < 9; i++)
+                    if (forward_move_flag == false)
                     {
-                        GameObject.Find("dummy" + i).transform.Rotate(Vector3.back * 90, Space.World);
+                        Debug.Log("↓");
+                        this.gameObject.transform.position += Vector3.back;
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.position += Vector3.back;
+                        }
+                        move_ghost_reset();
                     }
-                    move_ghost_reset();
                 }
-            }
 
-            /* ------------------------------ *
-             *      キー入力処理   移動       *
-             * ------------------------------ */
-            if (Input.GetKeyDown(KeyCode.A))        // Aキー:左に移動
-            {
-                if (left_move_flag == false)
+                /* ------------------------------ *
+                 *      キー入力処理   スピード   *
+                 * ------------------------------ */
+                if (Input.GetKey(KeyCode.Space))                // spaceキーを押している間:スピードアップ
                 {
-                    Debug.Log("←");
-                    this.gameObject.transform.position += Vector3.left;
-                    for (int i = 0; i < 9; i++)
-                    {
-                        GameObject.Find("dummy" + i).transform.position += Vector3.left;
-                    }
-                    move_ghost_reset();
+                    //Debug.Log("space now");
+                    peace_speed = 15.0f;
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.W))     // Wキー:奥に移動
-            {
-                if (back_move_flag == false)
-                {
-                    Debug.Log("↑");
-                    this.gameObject.transform.position += Vector3.forward;
-                    for (int i = 0; i < 9; i++)
-                    {
-                        GameObject.Find("dummy" + i).transform.position += Vector3.forward;
-                    }
-                    move_ghost_reset();
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.D))  // Dキー:右に移動
-            {
-                if (right_move_flag == false)
-                {
-                    Debug.Log("→");
-                    this.gameObject.transform.position += Vector3.right;
-                    for (int i = 0; i < 9; i++)
-                    {
-                        GameObject.Find("dummy" + i).transform.position += Vector3.right;
-                    }
-                    move_ghost_reset();
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.S))   // Sキー:手前に移動
-            {
-                if (forward_move_flag == false)
-                {
-                    Debug.Log("↓");
-                    this.gameObject.transform.position += Vector3.back;
-                    for (int i = 0; i < 9; i++)
-                    {
-                        GameObject.Find("dummy" + i).transform.position += Vector3.back;
-                    }
-                    move_ghost_reset();
-                }
-            }
 
-            /* ------------------------------ *
-             *      キー入力処理   スピード   *
-             * ------------------------------ */
-            if (Input.GetKey(KeyCode.Space))                // spaceキーを押している間:スピードアップ
-            {
-                //Debug.Log("space now");
-                peace_speed = 15.0f;
-            }
-            
-            if (Input.GetKeyUp(KeyCode.Space))              // spaceキーを離す:通常スピード
-            {
-                //Debug.Log("space up");
-                peace_speed = 1.0f;
+                if (Input.GetKeyUp(KeyCode.Space))              // spaceキーを離す:通常スピード
+                {
+                    //Debug.Log("space up");
+                    peace_speed = 1.0f;
+                }
             }
         }
     }
