@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5011c66c2475a14e917b24f14a98ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move_flag: 0
   right_move_flag: 0
   left_move_flag: 0
   forward_move_flag: 0
@@ -57,6 +58,8 @@ MonoBehaviour:
   back_rot_flag: 0
   script: {fileID: 1741049644025314694, guid: c7ef7c5aee5c4184dbb414f923c3fe89, type: 3}
   dummy_piece: {fileID: 1076376170416197594, guid: e986457c5343f75408f1eeacb554c6a9,
+    type: 3}
+  ghost_piece: {fileID: 917912335247260101, guid: 792acfd1d7437b84290a0478d74d195b,
     type: 3}
 --- !u!1 &3100231494520960061
 GameObject:

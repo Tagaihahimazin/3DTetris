@@ -168,6 +168,7 @@ public class field : MonoBehaviour
                 //Debug.Log("削除");
                 Destroy(dummy_Objects[i]);
             }
+            Destroy(GameObject.Find("ghost"));
             Destroy(self_peace.gameObject);
             //set_flag = false;
             if (create_flag == false)

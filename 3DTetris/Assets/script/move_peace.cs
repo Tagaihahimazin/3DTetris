@@ -21,11 +21,11 @@ public class move_peace : MonoBehaviour
     private float peace_speed;
     public GameObject script;
     public GameObject dummy_piece;
+    public GameObject ghost_piece;
 
     private field field_script;
 
-    public static
-        
+    public static GameObject Ghost_piece;
         
     GameObject[] dummy = new GameObject[9];
     private Vector3[] dummy_pos = { Vector3.down,
@@ -69,6 +69,8 @@ public class move_peace : MonoBehaviour
             //}
             //dummy[i].tag = "dummy";
         }
+        Ghost_piece = Instantiate(ghost_piece, this.gameObject.transform.position, this.gameObject.transform.rotation);
+        Ghost_piece.name = "ghost";
         field_script.set_flag = true;
         move_flag = false;
         right_move_flag = false;
@@ -116,6 +118,7 @@ public class move_peace : MonoBehaviour
                     {
                         GameObject.Find("dummy" + i).transform.Rotate(Vector3.forward * 90, Space.World);
                     }
+                    move_ghost_reset();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.R))           // Rキー:奥に回転
@@ -128,6 +131,7 @@ public class move_peace : MonoBehaviour
                     {
                         GameObject.Find("dummy" + i).transform.Rotate(Vector3.right * 90, Space.World);
                     }
+                    move_ghost_reset();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.F))           // Fキー:手前に回転
@@ -140,6 +144,7 @@ public class move_peace : MonoBehaviour
                     {
                         GameObject.Find("dummy" + i).transform.Rotate(Vector3.left * 90, Space.World);
                     }
+                    move_ghost_reset();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.E))           // Eキー:右に回転
@@ -152,6 +157,7 @@ public class move_peace : MonoBehaviour
                     {
                         GameObject.Find("dummy" + i).transform.Rotate(Vector3.back * 90, Space.World);
                     }
+                    move_ghost_reset();
                 }
             }
 
@@ -168,6 +174,7 @@ public class move_peace : MonoBehaviour
                     {
                         GameObject.Find("dummy" + i).transform.position += Vector3.left;
                     }
+                    move_ghost_reset();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.W))     // Wキー:奥に移動
@@ -180,6 +187,7 @@ public class move_peace : MonoBehaviour
                     {
                         GameObject.Find("dummy" + i).transform.position += Vector3.forward;
                     }
+                    move_ghost_reset();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.D))  // Dキー:右に移動
@@ -192,6 +200,7 @@ public class move_peace : MonoBehaviour
                     {
                         GameObject.Find("dummy" + i).transform.position += Vector3.right;
                     }
+                    move_ghost_reset();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.S))   // Sキー:手前に移動
@@ -204,6 +213,7 @@ public class move_peace : MonoBehaviour
                     {
                         GameObject.Find("dummy" + i).transform.position += Vector3.back;
                     }
+                    move_ghost_reset();
                 }
             }
 
@@ -224,6 +234,16 @@ public class move_peace : MonoBehaviour
         }
     }
 
+    void move_ghost_reset()
+    {
+        Ghost_piece.transform.position = this.gameObject.transform.position;
+        Ghost_piece.transform.rotation = this.gameObject.transform.rotation;
+        Ghost_piece.GetComponent<move_ghost>().move_flag = false;
+        foreach (Transform child in Ghost_piece.transform)
+        {
+            child.GetComponent<Renderer>().material = Ghost_piece.GetComponent<move_ghost>().Materials_list[1];
+        }
+    }
 
     void OnCollisionEnter(Collision collision)
     {
