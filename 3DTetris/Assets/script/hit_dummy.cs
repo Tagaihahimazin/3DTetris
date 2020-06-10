@@ -9,6 +9,7 @@ public class hit_dummy : MonoBehaviour
     public GameObject piece_obj;
     public GameObject ghost_obj;
     public GameObject gameover_canvas_obj;
+    private GameObject se_obj;
 
     private field field_script;
     private move_peace piece_script;
@@ -33,6 +34,7 @@ public class hit_dummy : MonoBehaviour
     {
         piece_obj = GameObject.Find("peace"); //変数名変えよう
         ghost_obj = GameObject.Find("ghost");
+        se_obj = GameObject.Find("SE");
         piece_script = piece_obj.GetComponent<move_peace>();
         if (ghost_obj != null) {
             ghost_script = ghost_obj.GetComponent<move_ghost>();
@@ -44,6 +46,7 @@ public class hit_dummy : MonoBehaviour
                 //Debug.Log(collider.gameObject.tag);
                 if (collider.gameObject.tag == "dummy0")
                 {
+                    se_obj.GetComponent<AudioSource>().PlayOneShot(piece_script.soundlist[0]);
                     piece_script.move_flag = true;
                     field_script.set_cube(GameObject.Find("peace"));
                 }

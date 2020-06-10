@@ -172,6 +172,7 @@ public class field : MonoBehaviour
         else
         {
             GUI_countdown.GetComponent<Text>().enabled = false;
+            GUI_obj.transform.Find("StartPanel").gameObject.GetComponent<Image>().enabled = false;
             gamestart_count = -1;
         }
     }
@@ -254,7 +255,7 @@ public class field : MonoBehaviour
             pieceObj[5] = pieces[Random.Range(0, pieces.Length)];
         }
         count++;
-        int posy = 30;
+        int posy = -300;
         for (int k = 1; k < 6; k++)
         {
             mino[k] = GameObject.Instantiate<GameObject>(pieceObj[k], new Vector3(25, posy, 20), Quaternion.identity);

@@ -17,6 +17,10 @@ public class move_peace : MonoBehaviour
     public bool left_rot_flag;
     public bool back_rot_flag;
 
+    public List<AudioClip> soundlist = new List<AudioClip>();
+    private AudioSource audioSource;
+
+
     private Vector3 Rotation;
     private float peace_speed;
     public GameObject script;
@@ -81,6 +85,8 @@ public class move_peace : MonoBehaviour
         right_rot_flag = false;
         left_rot_flag = false;
         back_rot_flag = false;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -120,6 +126,7 @@ public class move_peace : MonoBehaviour
                             GameObject.Find("dummy" + i).transform.Rotate(Vector3.forward * 90, Space.World);
                         }
                         move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.R))           // Rキー:奥に回転
@@ -133,6 +140,7 @@ public class move_peace : MonoBehaviour
                             GameObject.Find("dummy" + i).transform.Rotate(Vector3.right * 90, Space.World);
                         }
                         move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.F))           // Fキー:手前に回転
@@ -146,6 +154,7 @@ public class move_peace : MonoBehaviour
                             GameObject.Find("dummy" + i).transform.Rotate(Vector3.left * 90, Space.World);
                         }
                         move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.E))           // Eキー:右に回転
@@ -159,6 +168,7 @@ public class move_peace : MonoBehaviour
                             GameObject.Find("dummy" + i).transform.Rotate(Vector3.back * 90, Space.World);
                         }
                         move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
 
@@ -176,6 +186,7 @@ public class move_peace : MonoBehaviour
                             GameObject.Find("dummy" + i).transform.position += Vector3.left;
                         }
                         move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.W))     // Wキー:奥に移動
@@ -189,6 +200,7 @@ public class move_peace : MonoBehaviour
                             GameObject.Find("dummy" + i).transform.position += Vector3.forward;
                         }
                         move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.D))  // Dキー:右に移動
@@ -202,6 +214,7 @@ public class move_peace : MonoBehaviour
                             GameObject.Find("dummy" + i).transform.position += Vector3.right;
                         }
                         move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.S))   // Sキー:手前に移動
@@ -215,6 +228,7 @@ public class move_peace : MonoBehaviour
                             GameObject.Find("dummy" + i).transform.position += Vector3.back;
                         }
                         move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
 
@@ -224,7 +238,7 @@ public class move_peace : MonoBehaviour
                 if (Input.GetKey(KeyCode.Space))                // spaceキーを押している間:スピードアップ
                 {
                     //Debug.Log("space now");
-                    peace_speed = 15.0f;
+                    peace_speed = 100.0f;
                 }
 
                 if (Input.GetKeyUp(KeyCode.Space))              // spaceキーを離す:通常スピード
