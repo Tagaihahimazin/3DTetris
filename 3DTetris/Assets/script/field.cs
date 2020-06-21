@@ -10,9 +10,9 @@ public class field : MonoBehaviour
     public List<Material> Materials_list = new List<Material>();
 
     // fieldサイズ
-    private const int field_x = 10;
-    private const int field_y = 20;
-    private const int field_z = 10;
+    private const int field_x = 6;
+    private const int field_y = 12;
+    private const int field_z = 6;
 
     // fieldの状態
     private const int _NON = 0;
@@ -30,7 +30,7 @@ public class field : MonoBehaviour
     private GameObject[] nono = new GameObject[6];
     private GameObject maincamera,subcamera;
     private float rotSpeed = 2.0f;
-    private GameObject playerObject;
+    public GameObject playerObject;
     private Vector3 defAngle;
     private Vector3 newAngle;
     private Vector3 defPos;
@@ -61,7 +61,7 @@ public class field : MonoBehaviour
             {
                 for (var x = 0; x < field_cube.GetLength(2); x++)
                 {
-                    if ((x == 5 || x == 6)&&(z == 5 || z == 6)&&(y == field_cube.GetLength(1)-1))
+                    if ((x == field_x / 2 + 1 || x == field_x / 2 + 2) &&(z == field_z / 2 + 1 || z == field_x / 2 + 2) &&(y == field_cube.GetLength(1)-1))
                     {
                         field_array[z, y, x] = _GEN;
                     }
@@ -134,7 +134,7 @@ public class field : MonoBehaviour
         create_flag = false;
         maincamera = GameObject.Find("Main Camera");
         subcamera = GameObject.Find("Sub Camera");
-        playerObject = field_cube[6,11,6].gameObject;
+        //playerObject = field_cube[6,11,6].gameObject;
         defAngle = maincamera.transform.localEulerAngles;
         defPos = maincamera.transform.localPosition;
 
@@ -155,7 +155,7 @@ public class field : MonoBehaviour
     {
         if(gamestart_count == -1)
         {
-           // rotateCamera();
+            rotateCamera();
         }
         else if (gamestart_count < 4)
         {
@@ -271,7 +271,7 @@ public class field : MonoBehaviour
             posy -= 5;
             mino[k].name = "nextpiece";
         }
-        mino[0] = GameObject.Instantiate<GameObject>(pieceObj[0], new Vector3(5, 20, 5), Quaternion.identity);
+        mino[0] = GameObject.Instantiate<GameObject>(pieceObj[0], new Vector3(field_x / 2 + 1, field_y, field_z / 2 + 1), Quaternion.identity);
         mino[0].GetComponent<move_peace>().enabled = true;
         mino[0].name = "peace";
     }
