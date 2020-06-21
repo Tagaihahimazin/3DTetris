@@ -74,6 +74,10 @@ public class field : MonoBehaviour
                     {
                         field_array[z, y, x] = _FLOOR;
                     }
+                    else if(y==1&&(0<x&&x<field_x+1)&&(0<z && z < field_z + 1))
+                    {
+                        field_array[z, y, x] = _BLOCK;
+                    }
                     else
                     {
                         field_array[z, y, x] = _NON;
@@ -120,6 +124,10 @@ public class field : MonoBehaviour
                     {
                         field_cube[z, y, x].tag = "gen";
                     }
+                    if (field_array[z, y, x] == _BLOCK)
+                    {
+                        field_cube[z, y, x].tag = "block";
+                    }
                 }
             }
         }
@@ -147,7 +155,7 @@ public class field : MonoBehaviour
     {
         if(gamestart_count == -1)
         {
-            rotateCamera();
+           // rotateCamera();
         }
         else if (gamestart_count < 4)
         {
@@ -176,7 +184,6 @@ public class field : MonoBehaviour
             gamestart_count = -1;
         }
     }
-
     public void set_cube(GameObject self_peace)
     {
          if (set_flag == true)
@@ -206,10 +213,12 @@ public class field : MonoBehaviour
             Destroy(GameObject.Find("ghost"));
             Destroy(self_peace.gameObject);
             //set_flag = false;
+            Delete_surface();
             if (create_flag == false)
             {
                 Create_piece();
             }
+
         }
     }
     private void test(GameObject[,,] testtest)
@@ -265,6 +274,70 @@ public class field : MonoBehaviour
         mino[0] = GameObject.Instantiate<GameObject>(pieceObj[0], new Vector3(5, 20, 5), Quaternion.identity);
         mino[0].GetComponent<move_peace>().enabled = true;
         mino[0].name = "peace";
+    }
+
+    private void Delete_surface()
+    {
+        int x, y, z;
+        int CN;     //ブロックの数計算用
+        for(y = field_cube.GetLength(1)-3; y > 0; y--){
+            CN = 0;
+            for (x = 1; x < field_cube.GetLength(2) - 1; x++){
+                for(z = 1; z < field_cube.GetLength(0) - 1; z++){
+                    if (field_array[z, y, x] != _BLOCK)     break;
+                    CN++;
+                }
+
+                if (CN != x * (field_cube.GetLength(0)-2))      break;
+            }
+
+            if (CN == (field_cube.GetLength(2) - 2) * (field_cube.GetLength(0) - 2)) {   //もしも、面が揃っていたら
+                for(int ty = y; ty < field_cube.GetLength(1)-2; ty++){
+                    for(x=1;x < field_cube.GetLength(2) - 1; x++){
+                        for (z = 1; z < field_cube.GetLength(0) - 1; z++){
+                            field_array[z, ty, x] = field_array[z, ty + 1, x];
+                            Destroy(field_cube[z, ty, x]);
+                        }
+                    }
+                }
+                //再描画
+                for (var zz = 1; zz < field_cube.GetLength(0)-1; zz++)
+                {
+                    for (var yy = y; yy < field_cube.GetLength(1)-2; yy++)
+                    {
+                        for (var xx = 1; xx < field_cube.GetLength(2)-1; xx++)
+                        {
+                            field_cube[zz, yy, xx] = GameObject.Instantiate<GameObject>(field_obj, new Vector3(0, 0, 0), Quaternion.identity);
+                            string text = $"field_{zz}_{yy}_{xx}";
+                            field_cube[zz, yy, xx].name = text;
+                            field_cube[zz, yy, xx].transform.position = new Vector3(xx, yy, zz);
+                            field_cube[zz, yy, xx].GetComponent<Collider>().isTrigger = true;
+                            field_cube[zz, yy, xx].GetComponent<Renderer>().material = Materials_list[field_array[zz, yy, xx]];
+                            if (field_array[zz, yy, xx] == _FLOOR)
+                            {
+                                field_cube[zz, yy, xx].tag = "floor";
+                            }
+                            if (field_array[zz, yy, xx] == _KABE)
+                            {
+                                field_cube[zz, yy, xx].tag = "kabe";
+                            }
+                            if (field_array[zz, yy, xx] == _NON)
+                            {
+                                field_cube[zz, yy, xx].tag = "non";
+                            }
+                            if (field_array[zz, yy, xx] == _GEN)
+                            {
+                                field_cube[zz, yy, xx].tag = "gen";
+                            }
+                            if (field_array[zz, yy, xx] == _BLOCK)
+                            {
+                                field_cube[zz, yy, xx].tag = "block";
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void rotateCamera()
