@@ -43,6 +43,7 @@ public class field : MonoBehaviour
     public float gamestart_count = 0;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
+    public Material[,,] field_cube_material = new Material[field_z + 2, field_y + 2, field_x + 2];
     public int[,,] field_array = new int[field_z + 2, field_y + 2, field_x + 2];
 
     // Start is called before the first frame update
@@ -303,6 +304,7 @@ public class field : MonoBehaviour
                     for(x=1;x < field_cube.GetLength(2) - 1; x++){
                         for (z = 1; z < field_cube.GetLength(0) - 1; z++){
                             field_array[z, ty, x] = field_array[z, ty + 1, x];
+                            field_cube_material[z, ty, x] = field_cube[z, ty + 1, x].GetComponent<Renderer>().material;
                             Destroy(field_cube[z, ty, x]);
                         }
                     }
@@ -316,7 +318,7 @@ public class field : MonoBehaviour
                             field_cube[zz, yy, xx].name = text;
                             field_cube[zz, yy, xx].transform.position = new Vector3(xx, yy, zz);
                             field_cube[zz, yy, xx].GetComponent<Collider>().isTrigger = true;
-                            field_cube[zz, yy, xx].GetComponent<Renderer>().material = Materials_list[field_array[zz, yy, xx]];
+                            field_cube[zz, yy, xx].GetComponent<Renderer>().material = field_cube_material[zz, yy, xx];
                             
                             if (field_array[zz, yy, xx] == _NON){
                                 field_cube[zz, yy, xx].tag = "non";
