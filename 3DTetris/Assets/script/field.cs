@@ -11,7 +11,7 @@ public class field : MonoBehaviour
 
     // fieldサイズ
     private const int field_x = 6;
-    private const int field_y = 12;
+    private const int field_y = 15;
     private const int field_z = 6;
 
     // fieldの状態
@@ -29,6 +29,7 @@ public class field : MonoBehaviour
     private GameObject[] mino = new GameObject[6];
     private GameObject[] nono = new GameObject[6];
     private GameObject maincamera,subcamera;
+    public GameObject scoreobj;
     private float rotSpeed = 2.0f;
     public GameObject playerObject;
     private Vector3 defAngle;
@@ -38,6 +39,7 @@ public class field : MonoBehaviour
     public bool set_flag = true;
     public bool create_flag = false;
     int count = 0;
+    public static int score,highscore=0;
     public float gamestart_count = 0;
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
@@ -74,10 +76,10 @@ public class field : MonoBehaviour
                     {
                         field_array[z, y, x] = _FLOOR;
                     }
-                    else if(y==1&&(0<x&&x<field_x+1)&&(0<z && z < field_z + 1))
+                    /*else if(y==1&&(0<x&&x<field_x+1)&&(0<z && z < field_z + 1))
                     {
                         field_array[z, y, x] = _BLOCK;
-                    }
+                    }*/
                     else
                     {
                         field_array[z, y, x] = _NON;
@@ -134,6 +136,8 @@ public class field : MonoBehaviour
         create_flag = false;
         maincamera = GameObject.Find("Main Camera");
         subcamera = GameObject.Find("Sub Camera");
+        scoreobj = GUI_obj.transform.Find("Score").gameObject;
+        score = 0;
         //playerObject = field_cube[6,11,6].gameObject;
         defAngle = maincamera.transform.localEulerAngles;
         defPos = maincamera.transform.localPosition;
@@ -213,6 +217,9 @@ public class field : MonoBehaviour
             Destroy(GameObject.Find("ghost"));
             Destroy(self_peace.gameObject);
             //set_flag = false;
+            Delete_surface();
+            score += 4;
+            scoreobj.GetComponent<Text>().text = score.ToString();
             Delete_surface();
             if (create_flag == false)
             {
@@ -301,41 +308,27 @@ public class field : MonoBehaviour
                     }
                 }
                 //再描画
-                for (var zz = 1; zz < field_cube.GetLength(0)-1; zz++)
-                {
-                    for (var yy = y; yy < field_cube.GetLength(1)-2; yy++)
-                    {
-                        for (var xx = 1; xx < field_cube.GetLength(2)-1; xx++)
-                        {
+                for (var zz = 1; zz < field_cube.GetLength(0)-1; zz++){
+                    for (var yy = y; yy < field_cube.GetLength(1)-2; yy++){
+                        for (var xx = 1; xx < field_cube.GetLength(2)-1; xx++){
                             field_cube[zz, yy, xx] = GameObject.Instantiate<GameObject>(field_obj, new Vector3(0, 0, 0), Quaternion.identity);
                             string text = $"field_{zz}_{yy}_{xx}";
                             field_cube[zz, yy, xx].name = text;
                             field_cube[zz, yy, xx].transform.position = new Vector3(xx, yy, zz);
                             field_cube[zz, yy, xx].GetComponent<Collider>().isTrigger = true;
                             field_cube[zz, yy, xx].GetComponent<Renderer>().material = Materials_list[field_array[zz, yy, xx]];
-                            if (field_array[zz, yy, xx] == _FLOOR)
-                            {
-                                field_cube[zz, yy, xx].tag = "floor";
-                            }
-                            if (field_array[zz, yy, xx] == _KABE)
-                            {
-                                field_cube[zz, yy, xx].tag = "kabe";
-                            }
-                            if (field_array[zz, yy, xx] == _NON)
-                            {
+                            
+                            if (field_array[zz, yy, xx] == _NON){
                                 field_cube[zz, yy, xx].tag = "non";
                             }
-                            if (field_array[zz, yy, xx] == _GEN)
-                            {
-                                field_cube[zz, yy, xx].tag = "gen";
-                            }
-                            if (field_array[zz, yy, xx] == _BLOCK)
-                            {
+                        
+                            if (field_array[zz, yy, xx] == _BLOCK){
                                 field_cube[zz, yy, xx].tag = "block";
                             }
                         }
                     }
                 }
+                score += 100;
             }
         }
     }
