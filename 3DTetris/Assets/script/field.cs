@@ -24,10 +24,9 @@ public class field : MonoBehaviour
     public GameObject field_obj;
     public GameObject GUI_obj;
     private GameObject GUI_countdown;
-    public GameObject[] pieces = new GameObject[5];
-    private GameObject[] pieceObj = new GameObject[6];
+    public GameObject[] pieces = new GameObject[7];
+    private GameObject[] pieceObj = new GameObject[7];
     private GameObject[] mino = new GameObject[6];
-    private GameObject[] nono = new GameObject[6];
     private GameObject maincamera,subcamera;
     public GameObject scoreobj;
     private float rotSpeed = 2.0f;
@@ -38,9 +37,10 @@ public class field : MonoBehaviour
 
     public bool set_flag = true;
     public bool create_flag = false;
-    int count = 0;
-    public static int score,highscore=0;
+    public static int score,count,CN,highscore=0;
     public float gamestart_count = 0;
+
+    private int[] values = new int[7];
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
     public Material[,,] field_cube_material = new Material[field_z + 2, field_y + 2, field_x + 2];
@@ -139,16 +139,14 @@ public class field : MonoBehaviour
         subcamera = GameObject.Find("Sub Camera");
         scoreobj = GUI_obj.transform.Find("Score").gameObject;
         score = 0;
+        count = 0;
+        CN = 0;
         //playerObject = field_cube[6,11,6].gameObject;
         defAngle = maincamera.transform.localEulerAngles;
         defPos = maincamera.transform.localPosition;
 
         GUI_countdown = GUI_obj.transform.Find("CountDown").gameObject;
 
-        for (int k = 0; k < 6; k++)
-        {
-            pieceObj[k] = pieces[Random.Range(0, pieces.Length)];
-        }
         if (create_flag == false)
         {
             Create_piece();
@@ -259,19 +257,51 @@ public class field : MonoBehaviour
 
     private void Create_piece()
     {
-        if (count != 0)
+        //配列入れ替え
+        if (count == 0 || CN==1)
+        {
+            //値セット
+            for (int k = 0; k < 7; k++)
+                values[k] = k;
+
+            int i = 7;
+            while (i > 1)
+            {
+                int j = (int)Random.Range(1.0f, 100.0f) % i;
+                i--;
+                int tmp = values[i];
+                values[i] = values[j];
+                values[j] = tmp;
+            }
+            //初回セット
+            if (CN == 0)
+            {
+                for (int k = 0; k < 7; k++)
+                {
+                    pieceObj[k] = pieces[values[k]];
+                }
+            }
+            CN++;
+        }
+
+        if(CN>1)
         {
             for (int i = 0; i < 6; i++)
             {
                 Destroy(mino[i]);
             }
-            for (int k = 0; k < 5; k++)
+            for (int k = 0; k < 6; k++)
             {
                 pieceObj[k] = pieceObj[k + 1];
             }
-            pieceObj[5] = pieces[Random.Range(0, pieces.Length)];
+            pieceObj[6] = pieces[values[count]];
+            count++;
         }
-        count++;
+        if (count == 7)
+        {
+            count = 0;
+        }
+
         int posy = -300;
         for (int k = 1; k < 6; k++)
         {
