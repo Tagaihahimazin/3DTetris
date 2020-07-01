@@ -64,7 +64,7 @@ public class field : MonoBehaviour
             {
                 for (var x = 0; x < field_cube.GetLength(2); x++)
                 {
-                    if ((x == field_x / 2 + 1 || x == field_x / 2 + 2) &&(z == field_z / 2 + 1 || z == field_x / 2 + 2) &&(y == field_cube.GetLength(1)-1))
+                    if ((x == field_x / 2 + 1 || x == field_x / 2 ) &&(z == field_z / 2 + 1 || z == field_x / 2 ) &&(y == field_cube.GetLength(1)-1))
                     {
                         field_array[z, y, x] = _GEN;
                     }
@@ -279,7 +279,7 @@ public class field : MonoBehaviour
             posy -= 5;
             mino[k].name = "nextpiece";
         }
-        mino[0] = GameObject.Instantiate<GameObject>(pieceObj[0], new Vector3(field_x / 2 + 1, field_y, field_z / 2 + 1), Quaternion.identity);
+        mino[0] = GameObject.Instantiate<GameObject>(pieceObj[0], new Vector3(field_x / 2, field_y, field_z / 2 ), Quaternion.identity);
         mino[0].GetComponent<move_peace>().enabled = true;
         mino[0].name = "peace";
     }
