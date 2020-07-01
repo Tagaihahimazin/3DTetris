@@ -32,8 +32,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Text
+  - Canvas
   - 
   - 
   - 
@@ -59,4 +59,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: back
+    uniqueID: 157564327
+    locked: 0
+  - name: front
+    uniqueID: 3320624511
     locked: 0
