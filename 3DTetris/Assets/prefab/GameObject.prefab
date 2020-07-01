@@ -51,11 +51,17 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4500bce143d12d343b5d410bf5ceb264, type: 2}
   field_obj: {fileID: 2615246725989723873, guid: c13d59dfa36659248b14b734a3309dea,
     type: 3}
+  GUI_obj: {fileID: 0}
   pieces:
   - {fileID: 2731971900517853108, guid: ca434532c747fd84bbda684c0eeff9f2, type: 3}
   - {fileID: 1838846597359827879, guid: 8ab3a997803528c4eb088946cd93cab8, type: 3}
   - {fileID: 6586695128914606786, guid: 4a3cb3c75e9582c449de7fb88496e979, type: 3}
   - {fileID: 7664018312534538622, guid: 197ef49360aa9ef4aa890bb383566338, type: 3}
   - {fileID: 215051937009521752, guid: cadef012863d49b4fa4aea72ed1ec894, type: 3}
+  - {fileID: 4117187259859422649, guid: 161dcb329357e1649b053c7112aba02b, type: 3}
+  - {fileID: 8914168280815435915, guid: e94db48c91a36d14485e04f0083ce159, type: 3}
+  scoreobj: {fileID: 0}
+  playerObject: {fileID: 0}
   set_flag: 1
   create_flag: 0
+  gamestart_count: 0
