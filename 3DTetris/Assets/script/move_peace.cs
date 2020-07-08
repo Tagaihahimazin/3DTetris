@@ -171,6 +171,34 @@ public class move_peace : MonoBehaviour
                         audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
+                else if (Input.GetKeyDown(KeyCode.Z))           // Zキー:横に回転
+                {
+                    if (right_rot_flag == false)
+                    {
+                        Debug.Log("Z");
+                        this.gameObject.transform.Rotate(Vector3.up *90, Space.World);
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.Rotate(Vector3.up * 90, Space.World);
+                        }
+                        move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.C))           // Cキー:横に回転
+                {
+                    if (right_rot_flag == false)
+                    {
+                        Debug.Log("C");
+                        this.gameObject.transform.Rotate(Vector3.down * 90, Space.World);
+                        for (int i = 0; i < 9; i++)
+                        {
+                            GameObject.Find("dummy" + i).transform.Rotate(Vector3.down * 90, Space.World);
+                        }
+                        move_ghost_reset();
+                        audioSource.PlayOneShot(soundlist[1]);
+                    }
+                }
 
                 /* ------------------------------ *
                  *      キー入力処理   移動       *
