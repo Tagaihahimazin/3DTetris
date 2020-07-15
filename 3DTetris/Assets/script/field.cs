@@ -10,9 +10,9 @@ public class field : MonoBehaviour
     public List<Material> Materials_list = new List<Material>();
 
     // fieldサイズ
-    private const int field_x = 6;
+    private const int field_x = 7;
     private const int field_y = 15;
-    private const int field_z = 6;
+    private const int field_z = 7;
 
     // fieldの状態
     private const int _NON = 0;
@@ -24,6 +24,7 @@ public class field : MonoBehaviour
     public GameObject field_obj;
     public GameObject GUI_obj;
     private GameObject GUI_countdown;
+    public int[,] bottom;
     public GameObject[] pieces = new GameObject[7];
     private GameObject[] pieceObj = new GameObject[7];
     private GameObject[] mino = new GameObject[6];
@@ -39,7 +40,7 @@ public class field : MonoBehaviour
     public bool create_flag = false;
     public static int score,count,CN,highscore=0;
     public float gamestart_count = 0;
-
+    private int count_bottom;
     private int[] values = new int[7];
 
     public GameObject[,,] field_cube = new GameObject[field_z + 2, field_y + 2, field_x + 2];
@@ -49,6 +50,22 @@ public class field : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        count_bottom = 0;
+        bottom = new int[field_x+2, field_z+2];
+        for(var w = 0; w < field_x+2; w++)
+        {
+            for(var h = 0; h < field_z+2; h++)
+            {
+                if (((3 <= w && w <= 5) || (3 <= h && h <= 5)) && (w != 0 && w != field_x + 1 && h != 0 && h != field_z + 1))  
+                {
+                    bottom[w, h] = _NON;
+                    count_bottom++;
+                }
+                else
+                    bottom[w, h] = _KABE;
+            }
+        }
+        
         /* --------------------------------------- *
          *         fieldを配列で生成               *
          *                                         *
@@ -81,6 +98,10 @@ public class field : MonoBehaviour
                     {
                         field_array[z, y, x] = _BLOCK;
                     }*/
+                    else if (bottom[x, z] == _KABE)
+                    {
+                        field_array[z, y, x] = _KABE;
+                    }
                     else
                     {
                         field_array[z, y, x] = _NON;
@@ -146,7 +167,7 @@ public class field : MonoBehaviour
         defPos = maincamera.transform.localPosition;
 
         GUI_countdown = GUI_obj.transform.Find("CountDown").gameObject;
-
+        
         if (create_flag == false)
         {
             Create_piece();
