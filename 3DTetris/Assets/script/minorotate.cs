@@ -18,7 +18,7 @@ public class minorotate : MonoBehaviour
     void Update()
     {
         _Rotation = gameObject.transform.localEulerAngles;
-        Debug.Log(_Rotation);
+        // Debug.Log(_Rotation);
         gameObject.transform.localEulerAngles += new Vector3 (0.0f, variation * Time.deltaTime, 0.0f);
     }
 }
