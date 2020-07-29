@@ -85,22 +85,18 @@ public class field : MonoBehaviour
                     {
                         field_array[z, y, x] = _GEN;
                     }
-                    else if (x == 0 || x == field_x + 1
-                        || z == 0 || z == field_z + 1)
+                    else if ((x == 0 || x == field_x + 1
+                        || z == 0 || z == field_z + 1)|| bottom[x, z] == _KABE)
                     {
                         field_array[z, y, x] = _KABE;
                     }
-                    else if (y == 0)
+                    else if (y == 0 && bottom[x,z]==_NON)
                     {
                         field_array[z, y, x] = _FLOOR;
                     }
-                    /*else if(y==1&&(0<x&&x<field_x+1)&&(0<z && z < field_z + 1))
+                    else if (y==1&&(0<x&&x<field_x+1)&&(0<z && z < field_z + 1))
                     {
                         field_array[z, y, x] = _BLOCK;
-                    }*/
-                    else if (bottom[x, z] == _KABE)
-                    {
-                        field_array[z, y, x] = _KABE;
                     }
                     else
                     {
@@ -343,19 +339,27 @@ public class field : MonoBehaviour
             CN = 0;
             for (x = 1; x < field_cube.GetLength(2) - 1; x++){
                 for(z = 1; z < field_cube.GetLength(0) - 1; z++){
-                    if (field_array[z, y, x] != _BLOCK)     break;
-                    CN++;
+                    if (field_array[z, y, x] == _BLOCK)
+                    {
+                        CN++;
+                    }
                 }
-
-                if (CN != x * (field_cube.GetLength(0)-2))      break;
             }
 
-            if (CN == (field_cube.GetLength(2) - 2) * (field_cube.GetLength(0) - 2)) {   //もしも、面が揃っていたら
+             if (CN == count_bottom) {   //もしも、面が揃っていたら
                 for(int ty = y; ty < field_cube.GetLength(1)-2; ty++){
                     for(x=1;x < field_cube.GetLength(2) - 1; x++){
                         for (z = 1; z < field_cube.GetLength(0) - 1; z++){
-                            field_array[z, ty, x] = field_array[z, ty + 1, x];
-                            field_cube_material[z, ty, x] = field_cube[z, ty + 1, x].GetComponent<Renderer>().material;
+                            if (field_array[z, ty, x] == _BLOCK || field_array[z, ty, x] == _NON)
+                            {
+                                field_array[z, ty, x] = field_array[z, ty + 1, x];
+                                field_cube_material[z, ty, x] = field_cube[z, ty + 1, x].GetComponent<Renderer>().material;
+
+                            }
+                            else
+                            {
+                                field_cube_material[z, ty, x] = field_cube[z, ty, x].GetComponent<Renderer>().material;
+                            }
                             Destroy(field_cube[z, ty, x]);
                         }
                     }
