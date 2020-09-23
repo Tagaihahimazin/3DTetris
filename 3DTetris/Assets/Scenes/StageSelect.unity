@@ -1039,7 +1039,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1485641321}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1530,7 +1530,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121402350}
-  - component: {fileID: 2121402349}
   - component: {fileID: 2121402348}
   - component: {fileID: 2121402347}
   - component: {fileID: 2121402346}
@@ -1607,14 +1606,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &2121402349
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121402345}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &2121402350
 Transform:
   m_ObjectHideFlags: 0
@@ -1661,6 +1652,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPanel: {fileID: 316823425}
   selectPanel: {fileID: 1222704393}
+  selectStage: {fileID: 451177981}
+  selectUpStage: {fileID: 871277239}
+  selectDownStage: {fileID: 330087741}
   spriteimages:
   - {fileID: 21300000, guid: dd7fe61471fa4614d870841b4fbb8af3, type: 3}
   - {fileID: 21300000, guid: 5064f909c25ca544b87629ff1b549194, type: 3}
