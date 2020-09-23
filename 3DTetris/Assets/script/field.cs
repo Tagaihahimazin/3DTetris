@@ -94,10 +94,10 @@ public class field : MonoBehaviour
                     {
                         field_array[z, y, x] = _FLOOR;
                     }
-                    else if (y==1&&(0<x&&x<field_x+1)&&(0<z && z < field_z + 1))
+                    /*else if (y==1&&(0<x&&x<field_x+1)&&(0<z && z < field_z + 1))
                     {
                         field_array[z, y, x] = _BLOCK;
-                    }
+                    }*/
                     else
                     {
                         field_array[z, y, x] = _NON;
