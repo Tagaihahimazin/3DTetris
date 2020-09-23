@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneManagerScript : MonoBehaviour
 {
 	[SerializeField] GameObject startPanel;
 	[SerializeField] GameObject selectPanel;
+    [SerializeField] GameObject selectStage;
+    [SerializeField] GameObject selectUpStage;
+    [SerializeField] GameObject selectDownStage;
     public Sprite[] spriteimages = new Sprite[4];
     public List<int[,]> stageinfo = new List<int[,]>();
 
@@ -23,6 +27,7 @@ public class SceneManagerScript : MonoBehaviour
     private const int _KABE = 2;
     private const int _FLOOR = 3;
     private const int _GEN = 4;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +51,65 @@ public class SceneManagerScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                currentStage--;
+                if (currentStage == 0)
+                {
+                    currentStage = spriteimages.Length / 2 - 1;
+                }
+                else
+                {
+                    // 一周回るようにしたい
+                    currentStage--;
+                }
+                UnityEngine.Debug.Log("上矢印が押されました");
+                UnityEngine.Debug.Log(currentStage);
+                selectStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2 - 1];
+                if (currentStage == 0)
+                {
+                    selectUpStage.GetComponent<Image>().sprite = spriteimages[(spriteimages.Length / 2 )];
+                }
+                else
+                {
+                    selectUpStage.GetComponent<Image>().sprite = spriteimages[(currentStage - 1) * 2];
+                }
+                if (currentStage == spriteimages.Length / 2 - 1)
+                {
+                    selectDownStage.GetComponent<Image>().sprite = spriteimages[0];
+                }
+                else
+                {
+                    selectDownStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2];
+                }
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                currentStage++;
+                if (currentStage == spriteimages.Length / 2 - 1)
+                {
+                    currentStage = 0;
+                }
+                else
+                {
+                    // 一周回るようにしたい
+                    currentStage++;
+                }
+                UnityEngine.Debug.Log("下矢印が押されました");
+                UnityEngine.Debug.Log(currentStage);
+                selectStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2 - 1];
+                if (currentStage == 0)
+                {
+                    selectUpStage.GetComponent<Image>().sprite = spriteimages[(spriteimages.Length / 2)];
+                }
+                else
+                {
+                    selectUpStage.GetComponent<Image>().sprite = spriteimages[(currentStage - 1) * 2];
+                }
+                if (currentStage == spriteimages.Length / 2 - 1)
+                {
+                    selectDownStage.GetComponent<Image>().sprite = spriteimages[0];
+                }
+                else
+                {
+                    selectDownStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2];
+                }
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
@@ -64,6 +123,7 @@ public class SceneManagerScript : MonoBehaviour
 	void ShowStart()
 	{
         currentScenes = _START;
+        currentStage = 0;
 		startPanel.SetActive(true);
         selectPanel.SetActive(false);
 	}
@@ -71,7 +131,7 @@ public class SceneManagerScript : MonoBehaviour
 	void ShowSelect()
 	{
         currentScenes = _SELECT;
-        currentStage = 0;
+        currentStage = 1;
 		startPanel.SetActive(false);
         selectPanel.SetActive(true);
 	}
