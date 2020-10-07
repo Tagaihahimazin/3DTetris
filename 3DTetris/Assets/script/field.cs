@@ -52,20 +52,23 @@ public class field : MonoBehaviour
     {
         count_bottom = 0;
         bottom = new int[field_x+2, field_z+2];
-        for(var w = 0; w < field_x+2; w++)
-        {
-            for(var h = 0; h < field_z+2; h++)
-            {
-                if (((3 <= w && w <= 5) || (3 <= h && h <= 5)) && (w != 0 && w != field_x + 1 && h != 0 && h != field_z + 1))  
-                {
-                    bottom[w, h] = _NON;
-                    count_bottom++;
-                }
-                else
-                    bottom[w, h] = _KABE;
-            }
-        }
-        
+        //for(var w = 0; w < field_x+2; w++)
+        //{
+        //    for(var h = 0; h < field_z+2; h++)
+        //    {
+        //        if (((3 <= w && w <= 5) || (3 <= h && h <= 5)) && (w != 0 && w != field_x + 1 && h != 0 && h != field_z + 1))  
+        //        {
+        //            bottom[w, h] = _NON;
+        //            count_bottom++;
+        //        }
+        //        else
+        //            bottom[w, h] = _KABE;
+        //    }
+        //}
+        //bottom = MainGameController.getStageData();
+        Debug.Log(MainGameController.stagedata);
+        bottom = MainGameController.stagedata;
+
         /* --------------------------------------- *
          *         fieldを配列で生成               *
          *                                         *
@@ -101,6 +104,7 @@ public class field : MonoBehaviour
                     else
                     {
                         field_array[z, y, x] = _NON;
+                        count_bottom++;
                     }
                 }
             }
