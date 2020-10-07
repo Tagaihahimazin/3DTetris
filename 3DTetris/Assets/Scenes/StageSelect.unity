@@ -628,6 +628,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508015001}
   m_CullTransparentMesh: 0
+--- !u!1 &680415362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 680415364}
+  - component: {fileID: 680415363}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &680415363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680415362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd7eb6f74d30ca40a51c001a65b830f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &680415364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680415362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.497873, y: 22.110004, z: 3.0107894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &871277239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1082,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1485641321}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1530,7 +1573,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121402350}
-  - component: {fileID: 2121402349}
   - component: {fileID: 2121402348}
   - component: {fileID: 2121402347}
   - component: {fileID: 2121402346}
@@ -1607,14 +1649,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &2121402349
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121402345}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &2121402350
 Transform:
   m_ObjectHideFlags: 0
@@ -1661,6 +1695,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPanel: {fileID: 316823425}
   selectPanel: {fileID: 1222704393}
+  selectStage: {fileID: 451177981}
+  selectUpStage: {fileID: 871277239}
+  selectDownStage: {fileID: 330087741}
   spriteimages:
   - {fileID: 21300000, guid: dd7fe61471fa4614d870841b4fbb8af3, type: 3}
   - {fileID: 21300000, guid: 5064f909c25ca544b87629ff1b549194, type: 3}
