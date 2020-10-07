@@ -50,6 +50,8 @@ public class SceneManagerScript : MonoBehaviour
                 UnityEngine.Debug.Log("Return key was pressed.");
             }
             currentStage = 0;
+            selectUpStage.GetComponent<Image>().sprite = spriteimages[(spriteimages.Length-2)];
+            selectDownStage.GetComponent<Image>().sprite = spriteimages[2];
         }
         else if (currentScenes == 1)
         {
@@ -69,7 +71,7 @@ public class SceneManagerScript : MonoBehaviour
                 selectStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2 - 1];
                 if (currentStage == 0)
                 {
-                    selectUpStage.GetComponent<Image>().sprite = spriteimages[(spriteimages.Length / 2 )];
+                    selectUpStage.GetComponent<Image>().sprite = spriteimages[(spriteimages.Length - 2)];
                 }
                 else
                 {
@@ -100,7 +102,7 @@ public class SceneManagerScript : MonoBehaviour
                 selectStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2 - 1];
                 if (currentStage == 0)
                 {
-                    selectUpStage.GetComponent<Image>().sprite = spriteimages[(spriteimages.Length / 2)];
+                    selectUpStage.GetComponent<Image>().sprite = spriteimages[(spriteimages.Length - 2)];
                 }
                 else
                 {
