@@ -52,23 +52,19 @@ public class field : MonoBehaviour
     {
         count_bottom = 0;
         bottom = new int[field_x+2, field_z+2];
-        //for(var w = 0; w < field_x+2; w++)
-        //{
-        //    for(var h = 0; h < field_z+2; h++)
-        //    {
-        //        if (((3 <= w && w <= 5) || (3 <= h && h <= 5)) && (w != 0 && w != field_x + 1 && h != 0 && h != field_z + 1))  
-        //        {
-        //            bottom[w, h] = _NON;
-        //            count_bottom++;
-        //        }
-        //        else
-        //            bottom[w, h] = _KABE;
-        //    }
-        //}
-        //bottom = MainGameController.getStageData();
+        
         Debug.Log(MainGameController.stagedata);
         bottom = MainGameController.stagedata;
-
+        for (var w = 0; w < field_x + 2; w++)
+        {
+            for (var h = 0; h < field_z + 2; h++)
+            {
+                if (bottom[w, h] == 0)
+                {
+                    count_bottom++;
+                }
+            }
+        }
         /* --------------------------------------- *
          *         fieldを配列で生成               *
          *                                         *
@@ -89,11 +85,11 @@ public class field : MonoBehaviour
                         field_array[z, y, x] = _GEN;
                     }
                     else if ((x == 0 || x == field_x + 1
-                        || z == 0 || z == field_z + 1)|| bottom[x, z] == _KABE)
+                        || z == 0 || z == field_z + 1)|| bottom[field_z + 1 - z, x] == _KABE)
                     {
                         field_array[z, y, x] = _KABE;
                     }
-                    else if (y == 0 && bottom[x,z]==_NON)
+                    else if (y == 0 && bottom[field_x + 1 - z, x]==_NON)
                     {
                         field_array[z, y, x] = _FLOOR;
                     }
@@ -104,7 +100,6 @@ public class field : MonoBehaviour
                     else
                     {
                         field_array[z, y, x] = _NON;
-                        count_bottom++;
                     }
                 }
             }
