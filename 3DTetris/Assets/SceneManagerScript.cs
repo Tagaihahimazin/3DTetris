@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using CustomInputKey;
 
 public class SceneManagerScript : MonoBehaviour
 {
@@ -39,6 +41,7 @@ public class SceneManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //UnityEngine.Debug.Log(currentScenes);
         if (currentScenes == 0)
         {
             if (Input.GetKeyDown(KeyCode.Return))
@@ -47,7 +50,7 @@ public class SceneManagerScript : MonoBehaviour
                 UnityEngine.Debug.Log("Return key was pressed.");
             }
         }
-        if (currentScenes == 1)
+        else if (currentScenes == 1)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -80,7 +83,7 @@ public class SceneManagerScript : MonoBehaviour
                     selectDownStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2];
                 }
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 if (currentStage == spriteimages.Length / 2 - 1)
                 {
@@ -111,11 +114,13 @@ public class SceneManagerScript : MonoBehaviour
                     selectDownStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2];
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Return))
+            else if (CustomInput.Interval_InputKeydown(KeyCode.Return, 1))
             {
                 int[,] stagedata = stageinfo[currentStage];
                 UnityEngine.Debug.Log("return");
-                UnityEngine.Debug.Log(stagedata);
+                MainGameController.setStageData(stagedata);
+                UnityEngine.Debug.Log(MainGameController.getStageData());
+                SceneManager.LoadScene("tagaitest");
             }
         }
     }
