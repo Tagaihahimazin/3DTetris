@@ -49,6 +49,7 @@ public class SceneManagerScript : MonoBehaviour
                 ShowSelect();
                 UnityEngine.Debug.Log("Return key was pressed.");
             }
+            currentStage = 0;
         }
         else if (currentScenes == 1)
         {
