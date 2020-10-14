@@ -274,6 +274,37 @@ public class move_peace : MonoBehaviour
                     //Debug.Log("space up");
                     peace_speed = 1.0f;
                 }
+
+                if(Input.GetKeyDown(KeyCode.X)){
+                    if(field.Hold_count == 0){
+
+                        field.Hold_count = 1;
+                        field.Hold_obj = GameObject.Instantiate<GameObject>(this.gameObject, new Vector3(-5,300, -5), Quaternion.identity);
+                        field.Hold_obj.GetComponent<move_peace>().enabled = false;
+                        field_script.Hold_cube(this.gameObject);
+                    }
+                    
+                    else if(field.Hold_count==2){
+
+                        GameObject new_peace;
+                        new_peace = GameObject.Instantiate<GameObject>(field.Hold_obj, this.gameObject.transform.position, Quaternion.identity);
+                        Destroy(field.Hold_obj);
+                        field.Hold_obj = GameObject.Instantiate<GameObject>(this.gameObject, new Vector3(-5, 300, -5), Quaternion.identity);
+                        field.Hold_obj.GetComponent<move_peace>().enabled = false;
+                        new_peace.GetComponent<move_peace>().enabled = true;
+                        new_peace.name = "peace";
+
+                        GameObject[] dummy_Objects = GameObject.FindGameObjectsWithTag("dummy");
+                        for (int i = 0; i < dummy_Objects.Length; i++)
+                        {
+                            //Debug.Log("削除");
+                            Destroy(dummy_Objects[i]);
+                        }
+                        Destroy(GameObject.Find("ghost"));
+                        field.Hold_count = 1;
+                        Destroy(this.gameObject);
+                    }
+                }
             }
         }
     }
