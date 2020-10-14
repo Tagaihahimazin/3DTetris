@@ -27,7 +27,8 @@ public class field : MonoBehaviour
     public int[,] bottom;
     public GameObject[] pieces = new GameObject[7];
     private GameObject[] pieceObj = new GameObject[7];
-    private GameObject[] mino = new GameObject[6];
+    public static GameObject[] mino = new GameObject[6];
+    public static GameObject Hold_obj;
     private GameObject maincamera,subcamera;
     public GameObject scoreobj;
     private float rotSpeed = 2.0f;
@@ -40,6 +41,7 @@ public class field : MonoBehaviour
     public bool create_flag = false;
     public static int score,count,CN,highscore=0;
     public float gamestart_count = 0;
+    public static int Hold_count = 0;
     private int count_bottom;
     private int[] values = new int[7];
 
@@ -203,6 +205,7 @@ public class field : MonoBehaviour
             gamestart_count = -1;
         }
     }
+
     public void set_cube(GameObject self_peace)
     {
          if (set_flag == true)
@@ -234,6 +237,7 @@ public class field : MonoBehaviour
             //set_flag = false;
             Delete_surface();
             score += 4;
+            Hold_count = 2;
             scoreobj.GetComponent<Text>().text = score.ToString();
             Delete_surface();
             if (create_flag == false)
@@ -243,7 +247,30 @@ public class field : MonoBehaviour
 
         }
     }
-    private void test(GameObject[,,] testtest)
+
+    public void Hold_cube(GameObject self_peace)
+    {
+        GameObject[] dummy_Objects = GameObject.FindGameObjectsWithTag("dummy");
+        for (int i = 0; i < dummy_Objects.Length; i++)
+        {
+            //Debug.Log("削除");
+            Destroy(dummy_Objects[i]);
+        }
+        Destroy(GameObject.Find("ghost"));
+        Destroy(self_peace.gameObject);
+        //set_flag = false;
+        Delete_surface();
+        score += 4;
+
+        scoreobj.GetComponent<Text>().text = score.ToString();
+        Delete_surface();
+        if (create_flag == false)
+        {
+            Create_piece();
+        }
+    }
+
+        private void test(GameObject[,,] testtest)
     {
         foreach (GameObject i in testtest)
         {
