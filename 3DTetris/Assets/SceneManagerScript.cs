@@ -31,9 +31,15 @@ public class SceneManagerScript : MonoBehaviour
     private const int _GEN = 4;
 
 
+    public List<AudioClip> soundlist = new List<AudioClip>();
+
+    private AudioSource audioSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         StageGen();
         ShowStart();
     }
@@ -46,6 +52,7 @@ public class SceneManagerScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                audioSource.PlayOneShot(soundlist[1]);
                 ShowSelect();
                 UnityEngine.Debug.Log("Return key was pressed.");
             }
@@ -57,6 +64,7 @@ public class SceneManagerScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                audioSource.PlayOneShot(soundlist[0]);
                 if (currentStage == 0)
                 {
                     currentStage = spriteimages.Length / 2 - 1;
@@ -88,6 +96,7 @@ public class SceneManagerScript : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                audioSource.PlayOneShot(soundlist[0]);
                 if (currentStage == spriteimages.Length / 2 - 1)
                 {
                     currentStage = 0;
@@ -119,6 +128,7 @@ public class SceneManagerScript : MonoBehaviour
             }
             else if (CustomInput.Interval_InputKeydown(KeyCode.Return, 1))
             {
+                audioSource.PlayOneShot(soundlist[1]);
                 int[,] stagedata = stageinfo[currentStage];
                 UnityEngine.Debug.Log("return");
                 MainGameController.setStageData(stagedata);
