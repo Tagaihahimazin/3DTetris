@@ -26,6 +26,7 @@ public class move_peace : MonoBehaviour
     public GameObject script;
     public GameObject dummy_piece;
     public GameObject ghost_piece;
+    private int count_potepo;
 
     private field field_script;
 
@@ -94,6 +95,14 @@ public class move_peace : MonoBehaviour
     {
         timeElapsed += Time.deltaTime;
         Rotation = this.gameObject.transform.eulerAngles;
+        float lsh = Input.GetAxis("L_Stick_H");
+        float lsv = Input.GetAxis("L_Stick_V");
+        float dph = Input.GetAxis("D_Pad_H");
+        float dpv = Input.GetAxis("D_Pad_V");
+
+        if (lsh==0 && lsv==0 && dph==0 && dpv==0){
+            count_potepo = 1;
+        }
 
         if (field_script.gamestart_count == -1)
         {
@@ -115,7 +124,7 @@ public class move_peace : MonoBehaviour
                 /* ------------------------------ *
                  *      キー入力処理   回転       *
                  * ------------------------------ */
-                if (Input.GetKeyDown(KeyCode.Q))                // Qキー:左に回転
+                if (Input.GetKeyDown(KeyCode.Q)|| Input.GetKeyDown("joystick button 4"))                // Qキー:左に回転
                 {
                     if (left_rot_flag == false)
                     {
@@ -129,7 +138,8 @@ public class move_peace : MonoBehaviour
                         audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.R))           // Rキー:奥に回転
+                
+                else if (Input.GetKeyDown(KeyCode.R)|| Input.GetKeyDown("joystick button 3"))           // Rキー:奥に回転
                 {
                     if (back_rot_flag == false)
                     {
@@ -143,7 +153,8 @@ public class move_peace : MonoBehaviour
                         audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.F))           // Fキー:手前に回転
+                
+                else if (Input.GetKeyDown(KeyCode.F)|| Input.GetKeyDown("joystick button 0"))           // Fキー:手前に回転
                 {
                     if (forward_rot_flag == false)
                     {
@@ -157,7 +168,8 @@ public class move_peace : MonoBehaviour
                         audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.E))           // Eキー:右に回転
+                
+                else if (Input.GetKeyDown(KeyCode.E)|| Input.GetKeyDown("joystick button 5"))           // Eキー:右に回転
                 {
                     if (right_rot_flag == false)
                     {
@@ -171,7 +183,8 @@ public class move_peace : MonoBehaviour
                         audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.Z))           // Zキー:横に回転
+            
+                else if (Input.GetKeyDown(KeyCode.Z)|| Input.GetKeyDown("joystick button 2"))           // Zキー:左奥に回転
                 {
                     if (right_rot_flag == false)
                     {
@@ -185,7 +198,8 @@ public class move_peace : MonoBehaviour
                         audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.C))           // Cキー:横に回転
+               
+                else if (Input.GetKeyDown(KeyCode.C)|| Input.GetKeyDown("joystick button 1"))           // Cキー:右奥に回転
                 {
                     if (right_rot_flag == false)
                     {
@@ -199,11 +213,10 @@ public class move_peace : MonoBehaviour
                         audioSource.PlayOneShot(soundlist[1]);
                     }
                 }
-
                 /* ------------------------------ *
                  *      キー入力処理   移動       *
                  * ------------------------------ */
-                if (Input.GetKeyDown(KeyCode.A))        // Aキー:左に移動
+                if (Input.GetKeyDown(KeyCode.A)||((lsh < 0 )&&(lsh < lsv )&&(count_potepo==1)) || ((dph < 0) && (dph < dpv) && (count_potepo == 1)))        // Aキー:左に移動
                 {
                     if (left_move_flag == false)
                     {
@@ -215,9 +228,10 @@ public class move_peace : MonoBehaviour
                         }
                         move_ghost_reset();
                         audioSource.PlayOneShot(soundlist[1]);
+                        count_potepo = 0;
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.W))     // Wキー:奥に移動
+                else if (Input.GetKeyDown(KeyCode.W) || ((lsv > 0) && (lsv > lsh) && (count_potepo == 1)) || ((dpv > 0) && (dpv > dph) && (count_potepo == 1)))     // Wキー:奥に移動
                 {
                     if (back_move_flag == false)
                     {
@@ -229,9 +243,10 @@ public class move_peace : MonoBehaviour
                         }
                         move_ghost_reset();
                         audioSource.PlayOneShot(soundlist[1]);
+                        count_potepo = 0;
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.D))  // Dキー:右に移動
+                else if (Input.GetKeyDown(KeyCode.D) || ((lsh > 0) && (lsv < lsh) && (count_potepo == 1)) || ((dph > 0) && (dpv < dph) && (count_potepo == 1)))  // Dキー:右に移動
                 {
                     if (right_move_flag == false)
                     {
@@ -243,9 +258,10 @@ public class move_peace : MonoBehaviour
                         }
                         move_ghost_reset();
                         audioSource.PlayOneShot(soundlist[1]);
+                        count_potepo = 0;
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.S))   // Sキー:手前に移動
+                else if (Input.GetKeyDown(KeyCode.S) || ((lsv < 0) && (lsv < lsh) && (count_potepo == 1)) || ((dpv < 0) && (dpv < dph) && (count_potepo == 1)))   // Sキー:手前に移動
                 {
                     if (forward_move_flag == false)
                     {
@@ -257,25 +273,26 @@ public class move_peace : MonoBehaviour
                         }
                         move_ghost_reset();
                         audioSource.PlayOneShot(soundlist[1]);
+                        count_potepo = 0;
                     }
                 }
 
                 /* ------------------------------ *
                  *      キー入力処理   スピード   *
                  * ------------------------------ */
-                if (Input.GetKey(KeyCode.Space))                // spaceキーを押している間:スピードアップ
+                if (Input.GetKey(KeyCode.Space) || Input.GetKey("joystick button 8"))                // spaceキーを押している間:スピードアップ
                 {
                     //Debug.Log("space now");
                     peace_speed = 100.0f;
                 }
-
-                if (Input.GetKeyUp(KeyCode.Space))              // spaceキーを離す:通常スピード
+                if (Input.GetKeyUp(KeyCode.Space)|| Input.GetKeyUp("joystick button 8"))              // spaceキーを離す:通常スピード
                 {
                     //Debug.Log("space up");
                     peace_speed = 1.0f;
                 }
 
-                if(Input.GetKeyDown(KeyCode.X)){
+                if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyUp("joystick button 9"))
+                {
                     if(field.Hold_count == 0){
 
                         field.Hold_count = 1;

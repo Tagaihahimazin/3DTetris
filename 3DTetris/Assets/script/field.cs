@@ -36,6 +36,7 @@ public class field : MonoBehaviour
     private Vector3 defAngle;
     private Vector3 newAngle;
     private Vector3 defPos;
+    private int angle_count=0;
 
     public bool set_flag = true;
     public bool create_flag = false;
@@ -421,6 +422,7 @@ public class field : MonoBehaviour
 
     private void rotateCamera()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             // マウスクリック開始(マウスダウン)時にカメラの角度を保持(Z軸には回転させないため).
