@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 270902510}
   - component: {fileID: 270902512}
   - component: {fileID: 270902513}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DownButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 330087742}
   - component: {fileID: 330087744}
   - component: {fileID: 330087743}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DownStage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 451177982}
   - component: {fileID: 451177984}
   - component: {fileID: 451177983}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 508015002}
   - component: {fileID: 508015004}
   - component: {fileID: 508015003}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,8 @@ GameObject:
   - component: {fileID: 680415363}
   - component: {fileID: 680415365}
   - component: {fileID: 680415364}
-  m_Layer: 0
+  - component: {fileID: 680415368}
+  m_Layer: 5
   m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,18 +689,39 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680415362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.0107894}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 901278181}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.497873, y: 22.110004}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!223 &680415368
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680415362}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
 --- !u!1 &871277239
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,7 +733,7 @@ GameObject:
   - component: {fileID: 871277240}
   - component: {fileID: 871277242}
   - component: {fileID: 871277241}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: UpStage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,7 +808,7 @@ GameObject:
   - component: {fileID: 901278184}
   - component: {fileID: 901278183}
   - component: {fileID: 901278182}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,19 +822,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 901278180}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1974918812}
   m_Father: {fileID: 680415366}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &901278182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,7 +1011,7 @@ GameObject:
   - component: {fileID: 1095933886}
   - component: {fileID: 1095933885}
   - component: {fileID: 1095933887}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: UpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1176,7 @@ GameObject:
   - component: {fileID: 1222704395}
   - component: {fileID: 1222704394}
   - component: {fileID: 1222704398}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SelectPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1235,7 +1257,7 @@ RectTransform:
   - {fileID: 508015002}
   - {fileID: 1826190921}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1755,7 +1777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826190921}
   - component: {fileID: 1826190922}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SelectUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
