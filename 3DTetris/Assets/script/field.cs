@@ -53,6 +53,7 @@ public class field : MonoBehaviour
     void Start()
     {
         count_bottom = 0;
+        Hold_count = 0;
         bottom = new int[field_x+2, field_z+2];
         
         Debug.Log(MainGameController.stagedata);
@@ -237,7 +238,9 @@ public class field : MonoBehaviour
             //set_flag = false;
             Delete_surface();
             score += 4;
-            Hold_count = 2;
+            if(Hold_count==1){
+                Hold_count = 2;
+            }
             scoreobj.GetComponent<Text>().text = score.ToString();
             Delete_surface();
             if (create_flag == false)
