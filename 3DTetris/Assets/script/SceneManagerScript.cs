@@ -35,11 +35,18 @@ public class SceneManagerScript : MonoBehaviour
 
     private AudioSource audioSource;
 
+    GameObject ManageObject;
+    SceneFadeManager fadeManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        //SceneFadeManagerがアタッチされているオブジェクトを取得
+        ManageObject = GameObject.Find("GameController");
+        //オブジェクトの中のSceneFadeManagerを取得
+        fadeManager = ManageObject.GetComponent<SceneFadeManager>();
         StageGen();
         ShowStart();
     }
@@ -133,7 +140,9 @@ public class SceneManagerScript : MonoBehaviour
                 UnityEngine.Debug.Log("return");
                 MainGameController.setStageData(stagedata);
                 UnityEngine.Debug.Log(MainGameController.getStageData());
-                SceneManager.LoadScene("tagaitest");
+                //SceneManager.LoadScene("tagaitest");
+                //SceneFadeManagerの中のフェードアウト開始関数を呼び出し
+                fadeManager.fadeOutStart(0, 0, 0, 0, "tagaitest");
             }
         }
     }
