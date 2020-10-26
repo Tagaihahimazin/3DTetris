@@ -18,6 +18,8 @@ public class Result : MonoBehaviour
     private GameObject Retry_cursor;
     private GameObject Select_cursor;
 
+    private int count_potepo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,19 +44,30 @@ public class Result : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        float lsh = Input.GetAxis("L_Stick_H");
+        float lsv = Input.GetAxis("L_Stick_V");
+        float dph = Input.GetAxis("D_Pad_H");
+        float dpv = Input.GetAxis("D_Pad_V");
+
+        if (lsh == 0 && lsv == 0 && dph == 0 && dpv == 0)
         {
+            count_potepo = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow) || ((lsv > 0) && (lsv > lsh) && (count_potepo == 1)) || ((dpv > 0) && (dpv > dph) && (count_potepo == 1)))
+        {
+            count_potepo = 0;
             Debug.Log("UP");
             selectcount = !selectcount;
             ShowCursor(selectcount);
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || ((lsv < 0) && (lsv < lsh) && (count_potepo == 1)) || ((dpv < 0) && (dpv < dph) && (count_potepo == 1)))
         {
+            count_potepo = 0;
             Debug.Log("Down");
             selectcount = !selectcount;
             ShowCursor(selectcount);
         }
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1") || Input.GetKeyDown("joystick button 0"))
         {
             if (selectcount == false)
                 SceneManager.LoadScene("tagaitest");

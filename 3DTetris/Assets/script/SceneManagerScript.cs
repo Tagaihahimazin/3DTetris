@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using CustomInputKey;
+using CustomInputJoyStickKey;
 
 public class SceneManagerScript : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class SceneManagerScript : MonoBehaviour
     private const int _FLOOR = 3;
     private const int _GEN = 4;
 
+    private int count_potepo;
+
 
     public List<AudioClip> soundlist = new List<AudioClip>();
 
@@ -54,10 +57,20 @@ public class SceneManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float lsh = Input.GetAxis("L_Stick_H");
+        float lsv = Input.GetAxis("L_Stick_V");
+        float dph = Input.GetAxis("D_Pad_H");
+        float dpv = Input.GetAxis("D_Pad_V");
+
+        if (lsh == 0 && lsv == 0 && dph == 0 && dpv == 0)
+        {
+            count_potepo = 1;
+        }
+        
         //UnityEngine.Debug.Log(currentScenes);
         if (currentScenes == 0)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1") || Input.GetKeyDown("joystick button 0"))
             {
                 audioSource.PlayOneShot(soundlist[1]);
                 ShowSelect();
@@ -69,8 +82,9 @@ public class SceneManagerScript : MonoBehaviour
         }
         else if (currentScenes == 1)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || ((lsv > 0) && (lsv > lsh) && (count_potepo == 1)) || ((dpv > 0) && (dpv > dph) && (count_potepo == 1)))
             {
+                count_potepo = 0;
                 audioSource.PlayOneShot(soundlist[0]);
                 if (currentStage == 0)
                 {
@@ -101,8 +115,9 @@ public class SceneManagerScript : MonoBehaviour
                     selectDownStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2];
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.DownArrow) || ((lsv < 0) && (lsv < lsh) && (count_potepo == 1)) || ((dpv < 0) && (dpv < dph) && (count_potepo == 1)))
             {
+                count_potepo = 0;
                 audioSource.PlayOneShot(soundlist[0]);
                 if (currentStage == spriteimages.Length / 2 - 1)
                 {
@@ -133,7 +148,7 @@ public class SceneManagerScript : MonoBehaviour
                     selectDownStage.GetComponent<Image>().sprite = spriteimages[(currentStage + 1) * 2];
                 }
             }
-            else if (CustomInput.Interval_InputKeydown(KeyCode.Return, 1))
+            else if (CustomInput.Interval_InputKeydown(KeyCode.Return, 3) || CustomInputJoyStick.Interval_InputKeydown("joystick button 1",3) || CustomInputJoyStick.Interval_InputKeydown("joystick button 0", 3))
             {
                 audioSource.PlayOneShot(soundlist[1]);
                 int[,] stagedata = stageinfo[currentStage];
